@@ -108,11 +108,11 @@
 #### 运行
 
 ```
-npm run dev
+yarn start
 ```
 
 #### 构建
 
 ```
-npm run build
+yarn build
 ```
