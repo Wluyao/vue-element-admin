@@ -64,3 +64,6 @@ export default {
     el._conetnt = binding.value
   }
 }
+
+// 获取某个元素中的文本内容
+// const text = ele.textContent;

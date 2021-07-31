@@ -46,7 +46,7 @@ export default {
       default: true
     },
     position: {
-      validator: function(value) {
+      validator(value) {
         return ['left', 'center', 'right'].includes(value)
       },
       default: 'center'

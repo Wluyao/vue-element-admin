@@ -13,7 +13,9 @@
       #这种方式在打印之后回到页面，<strong>页面中的一切操作都会失效</strong>
       。比如点击打印按钮，打印完成后后，打印按钮就会失效。可以在打印完成后执行location.reload方法来刷新一遍页面。
     </p>
-    <p>#如果打印内容的样式是继承而来的将会无效，比如父元素设置了文字颜色，打印时这个CSS属性不会生效。</p>
+    <p>
+      #如果打印内容的样式是继承而来的将会无效，比如父元素设置了文字颜色，打印时这个CSS属性不会生效。
+    </p>
     <br />
 
     <h3>2.动态创建iframe</h3>
@@ -38,7 +40,9 @@
     <p>#需要将要打印的页面放在static文件夹中</p>
     <br />
 
-        <div>综合以上，个人认为方法2最优，可以做成一个组件，要打印的数据通过props传入。实际开发可根据具体业务需求选择。</div>
+    <div>
+      综合以上，个人认为方法2最优，可以做成一个组件，要打印的数据通过props传入。实际开发可根据具体业务需求选择。
+    </div>
   </div>
 </template>
 <script>
@@ -57,12 +61,10 @@ export default {
       const iframe = document.createElement('iframe')
       iframe.setAttribute('style', 'overflow:hidden;width:0px;height:0px; ')
       document.body.appendChild(iframe)
-
       const doc = iframe.contentWindow.document
       const printContent = document.querySelector('#print').innerHTML
       doc.write(printContent)
       doc.close()
-
       iframe.contentWindow.focus()
       iframe.contentWindow.print()
       document.body.removeChild(iframe)
@@ -80,7 +82,9 @@ export default {
     print4() {
       const printNode = document.querySelector('#print')
       const print = printNode.cloneNode(true)
-      const childs = Array.from(document.body.children).filter((child) => child.nodeName != 'SCRIPT')
+      const childs = Array.from(document.body.children).filter(
+        (child) => child.nodeName != 'SCRIPT'
+      )
       for (let i = childs.length; i--; ) {
         childs[i].style.display = 'none'
       }
@@ -94,9 +98,9 @@ export default {
       document.body.removeChild(print)
     },
     print5() {
-      const frame = document.querySelector('#printFrame')
-      // src/static文件夹中的文件需要复制到dist文件夹中
-      frame.setAttribute('src', './static/print/print.html')
+const frame = document.querySelector('#printFrame')
+// src/static文件夹中的文件需要复制到dist文件夹中
+frame.setAttribute('src', './static/print/print.html')
     }
   }
 }

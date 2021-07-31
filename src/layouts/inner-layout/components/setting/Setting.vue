@@ -32,6 +32,7 @@ export default {
   data() {
     return {
       // 初始打开抽屉，不然el-drawer组件不会渲染，其中的设置也不会生效
+      // 还要优化，每次弹一下交互不好。
       drawer: true,
       tagVisible: this.$store.getters.tagVisible
     }
