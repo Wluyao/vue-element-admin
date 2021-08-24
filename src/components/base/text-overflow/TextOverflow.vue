@@ -95,6 +95,7 @@ export default {
   }
 }
 </style>
+
 <style>
 .text-ellipsis__tooltip {
   max-width: 250px;

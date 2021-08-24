@@ -34,6 +34,7 @@
 <script>
 import Bar from './Bar'
 import getScrollbarWidth from './util'
+// element直接提供
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event'
 
 export default {
@@ -56,10 +57,10 @@ export default {
     this.content = this.$refs.content
     this.handleUpdate()
     this.setContentMargin()
-    // 没有节流是因为，设置的时间间隔过长会出现明显的卡顿，时间过短跟没节流没什么区别
-    // 为了监听offsetSize的变化
+    // 没有节流是因为，设置的时间间隔过长会出现卡顿，时间过短跟没节流没什么区别
+    // 监听offsetSize的变化
     addResizeListener(this.$refs.content, this.handleUpdate)
-    // 为了监听scrollSize的变化
+    // 监听scrollSize的变化
     addResizeListener(this.$refs.resize, this.handleUpdate)
   },
   destroyed() {
@@ -106,7 +107,7 @@ export default {
       }
     },
     // 只存在水平滚动条的时候，水平滚动监听wheel事件
-    handleWheel(evnt) {
+    handleWheel(event) {
       if (!this.verticalVisible && this.horizontalVisible) {
         // 阻止默认事件，不然当页面存在滚动条的时候，会滚动页面
         event.preventDefault()
