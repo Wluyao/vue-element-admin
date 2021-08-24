@@ -1,12 +1,11 @@
-import Vue from 'vue';
+import Vue from 'vue'
 
-import formatDate from './formatDate';
-
+import formatDate from './formatDate'
 
 const filters = {
-  formatDate,
+  formatDate
 }
 
-Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key]);
+Object.keys(filters).forEach((key) => {
+  Vue.filter(key, filters[key])
 })
