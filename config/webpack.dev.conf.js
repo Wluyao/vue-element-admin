@@ -34,7 +34,7 @@ module.exports = merge(baseWebpackConfig, {
     port: 3000,
     open: true,
     hot: true,
-    overlay: true
+    overlay: true,
   },
   module: {
     rules: [
