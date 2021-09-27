@@ -9,7 +9,7 @@ const route = {
 		title: 'Tab选项卡',
 		icon: 'tab',
 	},
-	children: [
+	children: [ 
 		{
 			name: 'Tab',
 			path: '/tab/index',
