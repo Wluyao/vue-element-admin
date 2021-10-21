@@ -39,7 +39,7 @@ const table = articleData.list
 
 export default {
 	getList(config) {
-		const { type, author, pageNumber = 1, pageSize = table.length, name } = getURLParams(config.url)
+		const { type = '', author = '', pageNumber = 1, pageSize = table.length, name = '' } = getURLParams(config.url)
 		const types = type.split(',')
 		const typesLength = types.length
 		const result = table.filter(item => {
@@ -58,10 +58,8 @@ export default {
 			validAuthor = item.author.includes(author)
 			return validAuthor && validName && validType
 		})
-
 		const startNumber = (Number(pageNumber) - 1) * Number(pageSize)
 		const endNumber = startNumber + Number(pageSize)
-
 		return {
 			code: 200,
 			data: {

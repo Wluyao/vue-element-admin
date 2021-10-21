@@ -8,24 +8,17 @@
 			<div class="operation">
 				<el-button type="primary" icon="el-icon-plus" @click="handleAdd">新增文章</el-button>
 				<el-button type="danger" icon="el-icon-minus" @click="handleDelete">批量删除</el-button>
-				<export-excel
-					file-name="文章数据表"
-					:header="['序号', '作者', '创建时间', '标题', '类型', '阅读数']"
-					:filter-filed="['index', 'author', 'createDate', 'name', 'type', 'browseNum']"
-					:data="articleList"
-				>
-					导出表格
-				</export-excel>
+				<el-button icon="el-icon-download" :loading="exportLoading" @click="handleExport">导出表格</el-button>
 			</div>
 		</div>
 
-		<el-form :inline="true" :model="queryCondition">
+		<el-form :inline="true" :model="query">
 			<el-form-item label="标题:">
-				<el-input v-model="queryCondition.name" placeholder="请输入文章标题关键字" clearable></el-input>
+				<el-input v-model="query.name" placeholder="请输入文章标题关键字" clearable></el-input>
 			</el-form-item>
 			<el-form-item label="作者:">
 				<el-select
-					v-model="queryCondition.author"
+					v-model="query.author"
 					placeholder="请输入作者姓名关键字"
 					filterable
 					remote
@@ -37,7 +30,7 @@
 				</el-select>
 			</el-form-item>
 			<el-form-item label="类型:">
-				<el-select v-model="queryCondition.type" placeholder="请选择文章类型" filterable multiple clearable>
+				<el-select v-model="query.type" placeholder="请选择文章类型" filterable multiple clearable>
 					<el-option v-for="item in tableMng.getTable('article')" :key="item.id" :label="item.name" :value="item.id" />
 				</el-select>
 			</el-form-item>
@@ -79,10 +72,10 @@
 
 		<pagination
 			:total="total"
-			:page-number.sync="queryCondition.pageNumber"
-			:page-size.sync="queryCondition.pageSize"
+			:page-number.sync="query.pageNumber"
+			:page-size.sync="query.pageSize"
 			@pagination="getArticleList"
-		/>
+		></pagination>
 	</div>
 </template>
 
@@ -91,14 +84,13 @@ import api from '@/api'
 import { scroll } from '@/utils/core'
 import tableMng from '@/utils/tableMng'
 import SectionTitle from '@/components/business/section-title'
-import ExportExcel from '@/components/business/excel/export-excel'
 import Pagination from '@/components/base/pagination'
+import { exportExcel } from '@/utils/excle'
 
 export default {
 	name: 'ArticleList',
 	components: {
 		SectionTitle,
-		ExportExcel,
 		Pagination,
 	},
 	data() {
@@ -108,7 +100,7 @@ export default {
 			userLoading: false,
 			articleList: [],
 			articleTableLoading: false,
-			queryCondition: {
+			query: {
 				name: '',
 				author: '',
 				type: [],
@@ -117,6 +109,7 @@ export default {
 			},
 			total: 0,
 			selectedRows: [],
+			exportLoading: false,
 		}
 	},
 	created() {
@@ -127,13 +120,13 @@ export default {
 		async getArticleList() {
 			this.articleTableLoading = true
 			const data = await api.article.getList({
-				...this.queryCondition,
-				type: this.queryCondition.type.toString(),
+				...this.query,
+				type: this.query.type.toString(),
 			})
 			this.articleList = data.list.map((item, index) => {
 				return {
 					...item,
-					index: (this.queryCondition.pageNumber - 1) * this.queryCondition.pageSize + index + 1,
+					index: (this.query.pageNumber - 1) * this.query.pageSize + index + 1,
 				}
 			})
 			this.total = data.total
@@ -179,6 +172,24 @@ export default {
 			const data = await api.user.getList({ name: keyword })
 			this.userListOptions = data.list.map(item => item.name)
 			this.userLoading = false
+		},
+		// 导出文章表格
+		async handleExport() {
+			this.exportLoading = true
+			const header = ['序号', '作者', '创建时间', '标题', '类型', '阅读数']
+			const res = await api.article.getList()
+			const data = res.list.map((item, index) => {
+				return {
+					index: (this.query.pageNumber - 1) * this.query.pageSize + index + 1,
+					author: item.author,
+					createDate: item.createDate,
+					name: item.name,
+					type: item.type,
+					browseNum: item.browseNum,
+				}
+			})
+			exportExcel(header, data, '文章数据表')
+			this.exportLoading = false
 		},
 	},
 }

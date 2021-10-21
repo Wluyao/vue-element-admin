@@ -1,13 +1,6 @@
 <template>
 	<div>
-		<export-excel
-			file-name="数据表"
-			:header="['姓名', '年龄', '性别', '电话', '电子邮箱', '毕业时间', '婚否']"
-			:data="tableData"
-		>
-			导出excel
-		</export-excel>
-
+		<el-button type="primary" :loading="exportLoading" @click="handleExport"> 导出excel </el-button>
 		<el-table border highlight-current-row :data="tableData">
 			<el-table-column prop="name" label="姓名"> </el-table-column>
 			<el-table-column prop="age" label="年龄"> </el-table-column>
@@ -21,7 +14,7 @@
 </template>
 
 <script>
-import ExportExcel from '@/components/business/excel/export-excel'
+import { exportExcel } from '@/utils/excle'
 
 const tableData = [
 	{
@@ -63,13 +56,17 @@ const tableData = [
 ]
 
 export default {
-	components: {
-		ExportExcel,
-	},
 	data() {
 		return {
+			exportLoading: false,
 			tableData,
 		}
+	},
+	methods: {
+		handleExport() {
+			const header = ['姓名', '年龄', '性别', '电话', '电子邮箱', '毕业时间', '婚否']
+			exportExcel(header, this.tableData, '数据表')
+		},
 	},
 }
 </script>
