@@ -75,7 +75,7 @@ export default {
     cursor: pointer;
 
     &:hover {
-      color: $auxiliary-text-color;
+      color: $black9;
     }
   }
 

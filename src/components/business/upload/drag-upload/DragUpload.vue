@@ -109,7 +109,7 @@ export default {
   .drag-upload__tip {
     font-size: 12px;
     line-height: 20px;
-    color: $auxiliary-text-color;
+    color: $black9;
   }
 }
 </style>

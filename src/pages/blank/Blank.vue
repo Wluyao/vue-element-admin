@@ -1,14 +1,14 @@
 <template>
-  <div >4554</div>
+	<div>4554</div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {}
-  },
-  mounted() {},
-  methods: {}
+	data() {
+		return {}
+	},
+	mounted() {},
+	methods: {},
 }
 </script>
 

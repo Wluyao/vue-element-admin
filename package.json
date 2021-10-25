@@ -4,7 +4,7 @@
   "description": "后台管理系统",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.dev.conf.js",
+    "serve": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.dev.conf.js",
     "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod.conf.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

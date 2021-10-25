@@ -79,7 +79,7 @@ export default {
 
     .icon {
       font-size: 24px;
-      color: $secondary-text-color;
+      color: $black6;
     }
 
     .name {

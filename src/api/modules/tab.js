@@ -1,4 +1,3 @@
-import service from '@/utils/service';
+import service from '@/utils/service'
 
-
-export const getList = (data) => service.get('/tab/list', data);
+export const getList = data => service.get('/tab/list', data)

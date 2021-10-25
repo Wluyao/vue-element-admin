@@ -36,36 +36,36 @@ hgroup,
 menu,
 nav,
 section {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-  font-size: 14px;
-  font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
-  color: #303133;
+	font-size: 14px;
+	font-family: 'Microsoft YaHei', Verdana, Arial, Helvetica, sans-serif;
+	color: #303133;
 }
 
 a {
-  text-decoration: none;
-  color: var(--theme);
+	text-decoration: none;
+	color: var(--theme);
 
-  &:hover {
-    color: var(--theme-white__3) !important;
-  }
+	&:hover {
+		color: var(--theme-white__3) !important;
+	}
 }
 
 ol,
 ul {
-  list-style: none;
+	list-style: none;
 }
 
 button,
 input,
 select,
 textarea {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	color: inherit;
 }

@@ -115,7 +115,7 @@ export default {
       margin-right: 5px;
 
       &:hover {
-        color: $auxiliary-text-color !important;
+        color: $black9 !important;
       }
     }
 
@@ -124,7 +124,7 @@ export default {
       cursor: pointer;
 
       &:hover {
-        color: $auxiliary-text-color;
+        color: $black9;
       }
     }
 
@@ -136,7 +136,7 @@ export default {
         color: #fff;
 
         &:hover {
-          color: $auxiliary-text-color;
+          color: $black9;
         }
       }
     }

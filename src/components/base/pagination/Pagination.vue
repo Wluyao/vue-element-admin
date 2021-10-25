@@ -100,7 +100,7 @@ export default {
 	.el-pagination .el-pager {
 		.number {
 			font-weight: normal;
-			color: $auxiliary-text-color;
+			color: $black9;
 		}
 
 		.el-icon-more {
@@ -119,7 +119,7 @@ export default {
 	.el-pagination.is-background .el-pager li:not(.disabled).active {
 		border-color: var(--theme);
 		background-color: #fff;
-		color: $auxiliary-text-color;
+		color: $black9;
 	}
 }
 </style>
