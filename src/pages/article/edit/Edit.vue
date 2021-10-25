@@ -73,14 +73,12 @@
 </template>
 
 <script>
-import api from '@/api'
-import bus from '@/utils/bus'
-import tableMng from '@/utils/tableMng'
+import dayjs from 'dayjs'
 import AvatarUpload from '@/components/business/upload/avatar-upload'
 import DragUpload from '@/components/business/upload/drag-upload'
-import SectionTitle from '@/components/business/section-title'
-import Tinymce from '@/components/business/tinymce'
-import dayjs from 'dayjs'
+import api from '@/api'
+import eventBus from '@/utils/event-bus'
+import tableMng from '@/utils/tableMng'
 
 const defaultDetail = {
 	id: '',
@@ -99,8 +97,6 @@ export default {
 	components: {
 		AvatarUpload,
 		DragUpload,
-		SectionTitle,
-		Tinymce,
 	},
 	data() {
 		return {
@@ -171,7 +167,7 @@ export default {
 			})
 		},
 		handleClose() {
-			bus.$emit('closeTag', this.$route.path)
+			eventBus.$emit('closeTag', this.$route.path)
 			this.$router.push('/article/list')
 		},
 	},

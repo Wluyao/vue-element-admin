@@ -11,7 +11,7 @@
 			</div>
 		</div>
 
-		<el-form :inline="true" :model="query">
+		<el-form ref="queryForm" :inline="true" :model="query">
 			<el-form-item label="姓名:">
 				<el-input v-model="query.name" placeholder="请输入用户姓名关键字" clearable></el-input>
 			</el-form-item>
@@ -36,7 +36,8 @@
 				</el-select>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" icon="el-icon-search" @click="getUserList"> 查询 </el-button>
+				<el-button type="primary" icon="el-icon-search" @click="getTableData">查询</el-button>
+				<el-button icon="el-icon-search" @click="handleReset">重置</el-button>
 			</el-form-item>
 		</el-form>
 
@@ -71,7 +72,7 @@
 						</span>
 					</template>
 				</el-table-column>
-				<el-table-column prop="createDate" label="创建时间" sortable></el-table-column>
+				<el-table-column prop="createDate" label="创建时间" sortable> </el-table-column>
 				<el-table-column prop="consume" label="累计消费额(元)" width="160px" sortable></el-table-column>
 				<el-table-column label="操作" width="120px">
 					<template slot-scope="scope">
@@ -83,12 +84,11 @@
 			</el-table>
 		</div>
 
-		<!-- 分页 -->
 		<pagination
 			:total="total"
 			:page-number.sync="query.pageNumber"
 			:page-size.sync="query.pageSize"
-			@pagination="getUserList"
+			@pagination="getTableData"
 		></pagination>
 
 		<edit :id="editId" :visible="editVisible" @onClose="handleClose" @onSave="handleSave" />
@@ -99,17 +99,24 @@
 /**
  * 用户管理
  */
+import _ from 'lodash'
 import api from '@/api'
 import { scroll } from '@/utils/core'
 import tableMng from '@/utils/tableMng'
-import SectionTitle from '@/components/business/section-title'
-import Edit from './components/Edit'
 import { exportExcel } from '@/utils/excle'
+import Edit from './components/Edit'
+
+const defaultQuery = {
+	name: '',
+	gender: '',
+	roles: [],
+	pageNumber: 1,
+	pageSize: 20,
+}
 
 export default {
 	name: 'User',
 	components: {
-		SectionTitle,
 		Edit,
 	},
 	data() {
@@ -117,13 +124,7 @@ export default {
 			tableMng,
 			userList: [],
 			tableLoading: false,
-			query: {
-				name: '',
-				gender: '',
-				roles: [],
-				pageNumber: 1,
-				pageSize: 20,
-			},
+			query: _.cloneDeep(defaultQuery),
 			total: 0,
 			selectedRows: [],
 			editId: '',
@@ -132,29 +133,28 @@ export default {
 		}
 	},
 	created() {
-		this.getUserList()
+		this.getTableData()
 	},
 	methods: {
 		//获取用户列表
-		async getUserList() {
+		async getTableData() {
 			this.tableLoading = true
 			const data = await api.user.getList(this.query)
 			this.userList = data.list.map((item, index) => {
 				return {
-					id: item.id,
+					...item,
 					index: (this.query.pageNumber - 1) * this.query.pageSize + index + 1,
-					name: item.name,
-					mobilePhone: item.mobilePhone,
-					gender: item.gender,
-					roles: item.roles,
-					createDate: this.$dayjs(item.createDate).format('YYYY-MM-DD HH:mm:ss'),
-					consume: item.consume,
 				}
 			})
 			this.total = data.total
 			this.tableLoading = false
 			const scrollElement = document.querySelector('.inner-layout__page')
 			scroll(scrollElement, 0, 800)
+		},
+		// 重置查询
+		handleReset() {
+			this.query = _.cloneDeep(defaultQuery)
+			this.getTableData()
 		},
 		// 编辑/新增
 		handleEdit(index, row) {
@@ -181,7 +181,7 @@ export default {
 					.then(async () => {
 						await api.user.remove({ id })
 						this.$message.success('删除成功！')
-						this.getUserList()
+						this.getTableData()
 					})
 					.catch(() => {})
 			}
@@ -197,7 +197,7 @@ export default {
 		// 保存
 		handleSave() {
 			this.handleClose()
-			this.getUserList()
+			this.getTableData()
 		},
 		// 关闭编辑模态窗
 		handleClose() {

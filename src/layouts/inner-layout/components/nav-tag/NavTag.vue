@@ -18,7 +18,7 @@
 
 <script>
 import Scrollbar from '@/components/base/scrollbar'
-import bus from '@/utils/bus'
+import eventBus from '@/utils/event-bus'
 
 export default {
   components: {
@@ -41,7 +41,7 @@ export default {
   },
   created() {
     this.addTag(this.$route)
-    bus.$on('closeTag', (path) => {
+    eventBus.$on('closeTag', (path) => {
       const tagIndex = this.tagList.findIndex((tag) => tag.path === path)
       this.tagList.splice(tagIndex, 1)
     })

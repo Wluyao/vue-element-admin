@@ -86,14 +86,10 @@
 import api from '@/api'
 import { scroll } from '@/utils/core'
 import tableMng from '@/utils/tableMng'
-import SectionTitle from '@/components/business/section-title'
 import { exportExcel } from '@/utils/excle'
 
 export default {
 	name: 'ArticleList',
-	components: {
-		SectionTitle,
-	},
 	data() {
 		return {
 			tableMng,

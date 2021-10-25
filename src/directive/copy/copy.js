@@ -55,13 +55,13 @@ const copy = content => {
 
 export default {
 	inserted(el, binding) {
-		el._conetnt = binding.value
+		el.content = binding.value
 		el.addEventListener('click', () => {
-			copy(el._conetnt)
+			copy(el.content)
 		})
 	},
 	update(el, binding) {
-		el._conetnt = binding.value
+		el.content = binding.value
 	},
 }
 
