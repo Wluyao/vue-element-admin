@@ -76,7 +76,7 @@
 				<el-table-column prop="consume" label="累计消费额(元)" width="160px" sortable></el-table-column>
 				<el-table-column label="操作" width="120px">
 					<template slot-scope="scope">
-						<el-button type="text" @click="handleEdit(scope.$index, scope.row)"> 编辑 </el-button>
+						<el-button type="text" @click="handleEdit(scope.row)"> 编辑 </el-button>
 						<el-divider direction="vertical"></el-divider>
 						<el-button type="text" @click="handleDelete(scope.$index, scope.row)"> 删除 </el-button>
 					</template>
@@ -91,7 +91,7 @@
 			@pagination="getTableData"
 		></pagination>
 
-		<edit :id="editId" :visible="editVisible" @onClose="handleClose" @onSave="handleSave" />
+		<user-edit ref="userEdit" @success="getTableData"></user-edit>
 	</div>
 </template>
 
@@ -104,7 +104,7 @@ import api from '@/api'
 import { scroll } from '@/utils/core'
 import tableMng from '@/utils/tableMng'
 import { exportExcel } from '@/utils/excle'
-import Edit from './components/Edit'
+import UserEdit from './components/UserEdit'
 
 const defaultQuery = {
 	name: '',
@@ -117,18 +117,16 @@ const defaultQuery = {
 export default {
 	name: 'User',
 	components: {
-		Edit,
+		UserEdit,
 	},
 	data() {
 		return {
 			tableMng,
 			userList: [],
-			tableLoading: false,
 			query: _.cloneDeep(defaultQuery),
 			total: 0,
 			selectedRows: [],
-			editId: '',
-			editVisible: false,
+			tableLoading: false,
 			exportLoading: false,
 		}
 	},
@@ -157,12 +155,11 @@ export default {
 			this.getTableData()
 		},
 		// 编辑/新增
-		handleEdit(index, row) {
-			this.editId = row ? row.id : ''
-			this.editVisible = true
+		handleEdit(row) {
+			this.$refs.userEdit.open(row)
 		},
 		// 删除
-		handleDelete(index, row) {
+		handleDelete(index) {
 			let id = []
 			let name = []
 			if (row) {
