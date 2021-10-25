@@ -1,6 +1,5 @@
 <template>
 	<div class="user-manager">
-		<!-- 工具栏 -->
 		<div class="user-manager__header">
 			<div class="title">
 				<section-title name="用户列表" />
@@ -12,7 +11,6 @@
 			</div>
 		</div>
 
-		<!-- 查询 -->
 		<el-form :inline="true" :model="query">
 			<el-form-item label="姓名:">
 				<el-input v-model="query.name" placeholder="请输入用户姓名关键字" clearable></el-input>
@@ -42,7 +40,6 @@
 			</el-form-item>
 		</el-form>
 
-		<!-- 用户列表 -->
 		<div class="user-manager__table">
 			<el-table
 				:data="userList"
@@ -55,7 +52,13 @@
 				<el-table-column prop="index" label="序号" width="80px"></el-table-column>
 				<el-table-column prop="name" label="姓名"></el-table-column>
 				<el-table-column prop="mobilePhone" label="手机" width="120px"></el-table-column>
-				<el-table-column prop="gender" label="性别" width="120px">
+				<el-table-column
+					prop="gender"
+					label="性别"
+					width="120px"
+					:filters="tableMng.formatTable('gender', 'value', 'text')"
+					:filter-method="handleFilterGender"
+				>
 					<template slot-scope="scope">
 						<span>{{ tableMng.getNameById('gender', scope.row.gender) }}</span>
 					</template>
@@ -86,19 +89,20 @@
 			:page-number.sync="query.pageNumber"
 			:page-size.sync="query.pageSize"
 			@pagination="getUserList"
-		/>
+		></pagination>
 
-		<!-- 用户编辑/新增 -->
 		<edit :id="editId" :visible="editVisible" @onClose="handleClose" @onSave="handleSave" />
 	</div>
 </template>
 
 <script>
+/**
+ * 用户管理
+ */
 import api from '@/api'
 import { scroll } from '@/utils/core'
 import tableMng from '@/utils/tableMng'
 import SectionTitle from '@/components/business/section-title'
-import Pagination from '@/components/base/pagination'
 import Edit from './components/Edit'
 import { exportExcel } from '@/utils/excle'
 
@@ -106,7 +110,6 @@ export default {
 	name: 'User',
 	components: {
 		SectionTitle,
-		Pagination,
 		Edit,
 	},
 	data() {
@@ -186,6 +189,10 @@ export default {
 		// 多选
 		handleSelectedRows(rows) {
 			this.selectedRows = rows
+		},
+		handleFilterGender(value, row, column) {
+			const property = column['property']
+			return row[property] === value
 		},
 		// 保存
 		handleSave() {

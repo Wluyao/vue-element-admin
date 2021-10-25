@@ -13,7 +13,7 @@
 		>
 			<el-form-item label="账号" prop="username">
 				<el-input type="text" auto-complete="on" autofocus v-model="loginForm.username" placeholder="请输入账号">
-					<svg-icon name="user" slot="prefix" icon-class="icon"></svg-icon>
+					<icon name="user" slot="prefix" icon-class="icon"></icon>
 				</el-input>
 			</el-form-item>
 
@@ -25,8 +25,8 @@
 					@keyup.enter.native="handleLogin"
 					placeholder="请输入密码"
 				>
-					<svg-icon name="password" slot="prefix" icon-class="icon"></svg-icon>
-					<svg-icon name="eye" slot="suffix" @click.native="showPwd" icon-class="icon icon-eye"></svg-icon>
+					<icon name="password" slot="prefix" icon-class="icon"></icon>
+					<icon name="eye" slot="suffix" @click.native="showPwd" icon-class="icon icon-eye"></icon>
 				</el-input>
 			</el-form-item>
 

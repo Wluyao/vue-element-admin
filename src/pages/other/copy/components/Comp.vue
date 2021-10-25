@@ -8,24 +8,24 @@
         <p>第二行内容222</p>
         <p>第三行内容333</p>
       </div>
-      <copy :content="content" />
+      <!-- <copy :content="content" /> -->
     </section>
 
     <br />
 
     <section>
       <p>{{ text }}</p>
-      <copy :content="text" />
+      <!-- <copy :content="text" /> -->
     </section>
   </div>
 </template>
 
 <script>
-import Copy from '@/components/base/Copy'
+// import Copy from '@/components/base/Copy'
 
 export default {
   components: {
-    Copy
+    // Copy
   },
   data() {
     return {

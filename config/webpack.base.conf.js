@@ -43,7 +43,7 @@ module.exports = {
             name: 'img/[name]-[hash:6].[ext]'
           }
         },
-        exclude: resolve('src/components/base/svg-icon/icons')
+        exclude: resolve('src/assets/icons')
       },
       {
         test: /\.svg$/,
@@ -53,7 +53,7 @@ module.exports = {
             symbolId: 'icon-[name]'
           }
         },
-        include: resolve('src/components/base/svg-icon/icons')
+        include: resolve('src/assets/icons')
       },
       {
         test: /\.ttf|eot|woff|woff2$/,

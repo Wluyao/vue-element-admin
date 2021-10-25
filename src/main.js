@@ -6,9 +6,9 @@ import ElementUI from 'element-ui'
 import App from '@/App'
 import router from '@/router'
 import store from '@/store'
-import filters from '@/filters'
 
 import '@/assets/styles/app.scss'
+import  '@/assets/icons'
 
 // mock数据
 import './mock'

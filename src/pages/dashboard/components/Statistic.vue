@@ -3,7 +3,7 @@
 		<el-col :lg="6" :sm="12" v-for="grid in grids" :key="grid.name">
 			<div class="dashboard-statistic" :class="grid.backgroundColor" @click="$emit('onChangeType', grid.type)">
 				<div class="grid-left">
-					<svg-icon :name="grid.icon" icon-class="grid-icon"></svg-icon>
+					<icon :name="grid.icon" icon-class="grid-icon"></icon>
 				</div>
 
 				<div class="grid-right">

@@ -80,18 +80,19 @@
 </template>
 
 <script>
+/**
+ * 文章管理
+ */
 import api from '@/api'
 import { scroll } from '@/utils/core'
 import tableMng from '@/utils/tableMng'
 import SectionTitle from '@/components/business/section-title'
-import Pagination from '@/components/base/pagination'
 import { exportExcel } from '@/utils/excle'
 
 export default {
 	name: 'ArticleList',
 	components: {
 		SectionTitle,
-		Pagination,
 	},
 	data() {
 		return {

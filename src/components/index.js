@@ -1,12 +1,20 @@
-// 注册全局组件，这样使用的时候不用每次都import。
+// 注册全局组件
 import Vue from 'vue'
-import SvgIcon from './base/svg-icon'
-Vue.component('svg-icon', SvgIcon)
+import upperFirst from 'lodash/upperFirst'
+import camelCase from 'lodash/camelCase'
 
-//导入所有svg图标，然后结合svg-sprite-loader可以按需使用
-const requireContext = require.context('./base/svg-icon/icons', false, /\.svg$/)
-const requireAll = (requireContext) => requireContext.keys().map(requireContext)
-requireAll(requireContext)
+const componentContext = require.context('./base', true, /\.vue$/)
 
-
- 
+componentContext.keys().forEach(fileName => {
+	// 获取组件的PascalCase命名
+	const componentName = upperFirst(
+		camelCase(
+			fileName
+				.split('/')
+				.pop()
+				.replace(/\.\w+$/, '')
+		)
+	)
+	const componentConfig = componentContext(fileName)
+	Vue.component(componentName, componentConfig.default || componentConfig)
+})

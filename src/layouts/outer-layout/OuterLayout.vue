@@ -1,49 +1,52 @@
 <template>
-  <div class="outer-layout">
-    <div class="outer-layout__header">
-      <svg-icon name="logo"></svg-icon>
-      <span>后台管理系统</span>
-    </div>
+	<div class="outer-layout">
+		<div class="outer-layout__header">
+			<icon name="logo" :size="36"></icon>
+			<span>后台管理系统</span>
+		</div>
 
-    <div class="outer-layout__page">
-      <router-view></router-view>
-    </div>
+		<div class="outer-layout__page">
+			<router-view></router-view>
+		</div>
 
-    <style-setting class="style-setting"></style-setting>
-  </div>
+		<style-setting class="style-setting"></style-setting>
+	</div>
 </template>
 
 <script>
+/**
+ * 外部布局(未登录)
+ */
 import StyleSetting from '@/components/business/setting/style-setting'
 
 export default {
-  components: {
-    StyleSetting
-  }
+	components: {
+		StyleSetting,
+	},
 }
 </script>
 
 <style lang="scss" scoped>
 .outer-layout {
-  min-height: 100vh;
-  background: url(~@/assets/images/layout/outer_bg.jpg) no-repeat fixed center;
-  background-size: cover;
+	min-height: 100vh;
+	background: url(~@/assets/images/layout/outer_bg.jpg) no-repeat fixed center;
+	background-size: cover;
 
-  .outer-layout__header {
-    padding-top: 60px;
-    text-align: center;
-    font-size: 32px;
-    color: #fff;
-  }
+	&__header {
+		padding-top: 60px;
+		text-align: center;
+		font-size: 32px;
+		color: #fff;
+	}
 
-  .outer-layout__page {
-    width: 440px;
-    margin: 0 auto;
-    margin-top: 60px;
-  }
+	&__page {
+		width: 440px;
+		margin: 0 auto;
+		margin-top: 60px;
+	}
 
-  .style-setting {
-    display: none;
-  }
+	.style-setting {
+		display: none;
+	}
 }
 </style>
