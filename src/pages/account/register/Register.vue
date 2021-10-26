@@ -53,8 +53,6 @@
 </template>
 
 <script>
-import api from '@/api'
-
 export default {
 	data() {
 		const validatePass = (rule, value, callback) => {
@@ -179,14 +177,14 @@ export default {
 				}
 			}, 1000)
 
-			await api.account.getCaptcha({ phone: this.accountInfo.phone })
+			await this.$api.account.getCaptcha({ phone: this.accountInfo.phone })
 			this.$message.success(`验证码已发送至手机${this.accountInfo.phone}，请注意查收！`)
 		},
 		handleRegister() {
 			this.registerLoading = true
 			this.$refs.form.validate(async valid => {
 				if (valid) {
-					await api.account.register(this.accountInfo)
+					await this.$api.account.register(this.accountInfo)
 					this.$message.success('注册成功！')
 					this.$store
 						.dispatch('Login', {

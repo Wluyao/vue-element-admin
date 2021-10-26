@@ -14,7 +14,6 @@
 
 <script>
 import G2 from '@antv/g2'
-import api from '@/api'
 
 const TYPE_NAME_MAP = {
 	visite: '访问量',
@@ -72,10 +71,10 @@ export default {
 		// 获取图表数据
 		async getLineChartData(callback) {
 			const getWeekData = () => {
-				return api.dashboard.getLineChartData({ type: 'week' })
+				return this.$api.dashboard.getLineChartData({ type: 'week' })
 			}
 			const getMonthData = () => {
-				return api.dashboard.getLineChartData({ type: 'month' })
+				return this.$api.dashboard.getLineChartData({ type: 'month' })
 			}
 			const [weekData, monthData] = await Promise.all([getWeekData(), getMonthData()])
 			this.weekData = weekData

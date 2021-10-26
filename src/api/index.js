@@ -1,10 +1,18 @@
-import * as account from './modules/account'
-import * as common from './modules/common'
-import * as article from './modules/article'
-import * as dashboard from './modules/dashboard'
-import * as tab from './modules/tab'
-import * as user from './modules/user'
+import _ from 'lodash'
 
-const api = { account, common, article, dashboard, tab, user }
+const api = {}
+
+const apiContext = require.context('./modules', false, /\.js$/)
+
+apiContext.keys().forEach(path => {
+	const moduleName = _.camelCase(
+		path
+			.split('/')
+			.pop()
+			.replace(/\.\w+$/, '')
+	)
+	api[moduleName] = apiContext(path)
+})
+
 
 export default api

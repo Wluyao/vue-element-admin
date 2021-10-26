@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import api from '@/api'
 
 export default {
 	data() {
@@ -43,7 +42,7 @@ export default {
 	},
 	methods: {
 		async getTask() {
-			const data = await api.dashboard.getTodoListData()
+			const data = await this.$api.dashboard.getTodoListData()
 			this.taskData = data
 		},
 		handleAdd() {

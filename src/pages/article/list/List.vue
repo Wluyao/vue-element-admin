@@ -83,7 +83,6 @@
 /**
  * 文章管理
  */
-import api from '@/api'
 import { scroll } from '@/utils/core'
 import tableMng from '@/utils/tableMng'
 import { exportExcel } from '@/utils/excle'
@@ -116,7 +115,7 @@ export default {
 		// 获取文章列表
 		async getArticleList() {
 			this.articleTableLoading = true
-			const data = await api.article.getList({
+			const data = await this.$api.article.getList({
 				...this.query,
 				type: this.query.type.toString(),
 			})
@@ -153,7 +152,7 @@ export default {
 					type: 'warning',
 				})
 					.then(async () => {
-						await api.article.remove({ id })
+						await this.$api.article.remove({ id })
 						this.$message.success('删除成功！')
 						this.getArticleList()
 					})
@@ -166,7 +165,7 @@ export default {
 		},
 		async getRemoteUserList(keyword) {
 			this.userLoading = true
-			const data = await api.user.getList({ name: keyword })
+			const data = await this.$api.user.getList({ name: keyword })
 			this.userListOptions = data.list.map(item => item.name)
 			this.userLoading = false
 		},
@@ -174,7 +173,7 @@ export default {
 		async handleExport() {
 			this.exportLoading = true
 			const header = ['序号', '作者', '创建时间', '标题', '类型', '阅读数']
-			const res = await api.article.getList()
+			const res = await this.$api.article.getList()
 			const data = res.list.map((item, index) => {
 				return {
 					index: (this.query.pageNumber - 1) * this.query.pageSize + index + 1,

@@ -76,7 +76,6 @@
 import dayjs from 'dayjs'
 import AvatarUpload from '@/components/business/upload/avatar-upload'
 import DragUpload from '@/components/business/upload/drag-upload'
-import api from '@/api'
 import eventBus from '@/utils/event-bus'
 import tableMng from '@/utils/tableMng'
 
@@ -138,7 +137,7 @@ export default {
 	methods: {
 		async getDetail() {
 			if (this.articleId) {
-				const data = await api.article.getDetail({ id: this.articleId })
+				const data = await this.$api.article.getDetail({ id: this.articleId })
 				this.articleDetail = {
 					id: data.id,
 					name: data.name,
@@ -157,7 +156,7 @@ export default {
 			this.$refs.form.validate(async valid => {
 				if (valid) {
 					this.submitLoading = true
-					await api.article.update({ detail: this.articleDetail })
+					await this.$api.article.update({ detail: this.articleDetail })
 					this.submitLoading = false
 					this.$message.success('发布成功')
 					this.handleClose()

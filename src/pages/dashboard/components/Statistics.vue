@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import api from '@/api'
 import countTo from 'vue-count-to'
 
 export default {
@@ -60,7 +59,7 @@ export default {
 	},
 	methods: {
 		async getGridData() {
-			const data = await api.dashboard.getGridData()
+			const data = await this.$api.dashboard.getGridData()
 			this.grids.forEach((item, index) => {
 				item.number = Object.values(data)[index]
 			})

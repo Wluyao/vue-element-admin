@@ -62,7 +62,6 @@
 
 <script>
 import _ from 'lodash'
-import api from '@/api'
 import tableMng from '@/utils/tableMng'
 import AvatarUpload from '@/components/business/upload/avatar-upload'
 
@@ -165,7 +164,7 @@ export default {
 			if (!id) return
 			this.initLoading = true
 			try {
-				const res = await api.user.getDetail({ id })
+				const res = await this.$api.user.getDetail({ id })
 				this.changeDetail(res)
 			} catch (err) {
 				console.error(err)
@@ -178,7 +177,7 @@ export default {
 				if (valid) {
 					this.confirmLoading = true
 					try {
-						await api.user.update({ detail: this.detail })
+						await this.$api.user.update({ detail: this.detail })
 						this.$message.success('提交成功')
 						this.handleClose()
 						this.$emit('success')

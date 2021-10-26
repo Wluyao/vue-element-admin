@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import api from '@/api'
 
 export default {
 	props: {
@@ -30,7 +29,7 @@ export default {
 	methods: {
 		async getList() {
 			this.tabLoading = true
-			const data = await api.tab.getList({ name: this.name })
+			const data = await this.api.tab.getList({ name: this.name })
 			this.tableData = data
 			this.tabLoading = false
 		},

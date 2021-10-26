@@ -51,8 +51,6 @@
 </template>
 
 <script>
-import api from '@/api'
-
 export default {
 	data() {
 		var validatePass = (rule, value, callback) => {
@@ -169,7 +167,7 @@ export default {
 				}
 			}, 1000)
 
-			await api.account.getCaptcha({ phone: this.formData.phone })
+			await this.$api.account.getCaptcha({ phone: this.formData.phone })
 			this.$message.success(`验证码已发送至手机${this.formData.phone}，请注意查收！`)
 		},
 		// 提交

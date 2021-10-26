@@ -1,20 +1,19 @@
 // 注册全局组件
 import Vue from 'vue'
-import upperFirst from 'lodash/upperFirst'
-import camelCase from 'lodash/camelCase'
+import _ from 'lodash'
 
 const componentContext = require.context('./base', true, /\.vue$/)
 
-componentContext.keys().forEach(fileName => {
+componentContext.keys().forEach(path => {
 	// 获取组件的PascalCase命名
-	const componentName = upperFirst(
-		camelCase(
-			fileName
+	const componentName = _.upperFirst(
+		_.camelCase(
+			path
 				.split('/')
 				.pop()
 				.replace(/\.\w+$/, '')
 		)
 	)
-	const componentConfig = componentContext(fileName)
+	const componentConfig = componentContext(path)
 	Vue.component(componentName, componentConfig.default || componentConfig)
 })

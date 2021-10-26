@@ -100,7 +100,6 @@
  * 用户管理
  */
 import _ from 'lodash'
-import api from '@/api'
 import { scroll } from '@/utils/core'
 import tableMng from '@/utils/tableMng'
 import { exportExcel } from '@/utils/excle'
@@ -137,7 +136,7 @@ export default {
 		//获取用户列表
 		async getTableData() {
 			this.tableLoading = true
-			const data = await api.user.getList(this.query)
+			const data = await this.$api.user.getList(this.query)
 			this.userList = data.list.map((item, index) => {
 				return {
 					...item,
@@ -176,7 +175,7 @@ export default {
 					type: 'warning',
 				})
 					.then(async () => {
-						await api.user.remove({ id: ids })
+						await this.$api.user.remove({ id: ids })
 						this.$message.success('删除成功！')
 						this.getTableData()
 					})
@@ -195,7 +194,7 @@ export default {
 		async handleExport() {
 			this.exportLoading = true
 			const header = ['序号', '姓名', '手机', '性别', '角色', '创建时间', '累计消费额(元)']
-			const res = await api.user.getList()
+			const res = await this.$api.user.getList()
 			const data = res.list.map((item, index) => {
 				return {
 					index: (this.query.pageNumber - 1) * this.query.pageSize + index + 1,
