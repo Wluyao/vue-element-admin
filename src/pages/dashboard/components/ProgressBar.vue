@@ -32,7 +32,7 @@ export default {
 
 <style lang="scss" scoped>
 .dashboard-progress {
-	.dashboard-progress__header {
+	&__header {
 		font-size: 16px;
 	}
 }

@@ -3,7 +3,7 @@
 		class="base-dialog"
 		:custom-class="customClass"
 		:title="title"
-		:visible.sync="dialogVisible"
+		:visible="visible"
 		:destroy-on-close="destroyOnClose"
 		:width="width"
 		:top="top"
@@ -71,25 +71,12 @@ export default {
 			default: true,
 		},
 	},
-	computed: {
-		dialogVisible: {
-			get() {
-				return this.visible
-			},
-			set(val) {
-				this.$emit('update:visible', val)
-			},
-		},
-	},
-	data() {
-		return {}
-	},
+
 	methods: {
 		handleConfirm() {
 			this.$emit('confirm')
 		},
 		handleClose() {
-			// this.dialogVisible = false
 			this.$emit('close')
 		},
 	},

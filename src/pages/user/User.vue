@@ -5,8 +5,8 @@
 				<section-title name="用户列表" />
 			</div>
 			<div class="operation">
-				<el-button type="primary" icon="el-icon-plus" @click="handleEdit"> 新增用户 </el-button>
-				<el-button type="danger" icon="el-icon-minus" @click="handleDelete"> 批量删除 </el-button>
+				<el-button type="primary" icon="el-icon-plus" @click="handleEdit({})"> 新增用户 </el-button>
+				<el-button type="danger" icon="el-icon-minus" @click="handleDelete({})"> 批量删除 </el-button>
 				<el-button icon="el-icon-download" :loading="exportLoading" @click="handleExport">导出表格</el-button>
 			</div>
 		</div>
@@ -76,9 +76,9 @@
 				<el-table-column prop="consume" label="累计消费额(元)" width="160px" sortable></el-table-column>
 				<el-table-column label="操作" width="120px">
 					<template slot-scope="scope">
-						<el-button type="text" @click="handleEdit(scope.row)"> 编辑 </el-button>
+						<el-button type="text" @click="handleEdit(scope.row)">编辑</el-button>
 						<el-divider direction="vertical"></el-divider>
-						<el-button type="text" @click="handleDelete(scope.$index, scope.row)"> 删除 </el-button>
+						<el-button type="text" @click="handleDelete(scope.row)">删除</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -159,24 +159,24 @@ export default {
 			this.$refs.userEdit.open(row)
 		},
 		// 删除
-		handleDelete(index) {
-			let id = []
-			let name = []
-			if (row) {
-				id = [row.id]
-				name = [row.name]
+		handleDelete(row) {
+			let ids = []
+			let names = []
+			if (row.id) {
+				ids = [row.id]
+				names = [row.name]
 			} else {
-				id = this.selectedRows.map(row => row.id)
-				name = this.selectedRows.map(row => row.name)
+				ids = this.selectedRows.map(row => row.id)
+				names = this.selectedRows.map(row => row.name)
 			}
-			if (name.length === 0) {
+			if (names.length === 0) {
 				this.$message.warning('请选择要删除的用户！')
 			} else {
-				this.$confirm(`确定删除用户：“${name.join('，')}”？`, '提示', {
+				this.$confirm(`确定删除用户：“${names.join('，')}”？`, '提示', {
 					type: 'warning',
 				})
 					.then(async () => {
-						await api.user.remove({ id })
+						await api.user.remove({ id: ids })
 						this.$message.success('删除成功！')
 						this.getTableData()
 					})
@@ -190,15 +190,6 @@ export default {
 		handleFilterGender(value, row, column) {
 			const property = column['property']
 			return row[property] === value
-		},
-		// 保存
-		handleSave() {
-			this.handleClose()
-			this.getTableData()
-		},
-		// 关闭编辑模态窗
-		handleClose() {
-			this.editVisible = false
 		},
 		// 导出excel表格
 		async handleExport() {

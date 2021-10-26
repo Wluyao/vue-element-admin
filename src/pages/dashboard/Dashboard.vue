@@ -1,24 +1,24 @@
 <template>
 	<div>
-		<statistic @onChangeType="hanldeChangeType" />
-		<line-chart :statistic-type="statisticType" />
+		<statistics @onChangeType="hanldeChangeType"></statistics>
+		<line-chart :statistic-type="statisticType"></line-chart>
 
 		<el-row :gutter="20">
 			<el-col :span="8">
-				<todo-list />
+				<todo-list></todo-list>
 			</el-col>
 			<el-col :span="8">
-				<progress-bar />
+				<progress-bar></progress-bar>
 			</el-col>
 			<el-col :span="8">
-				<new-goods />
+				<new-goods></new-goods>
 			</el-col>
 		</el-row>
 	</div>
 </template>
 
 <script>
-import Statistic from './components/Statistic'
+import Statistics from './components/Statistics'
 import LineChart from './components/LineChart'
 import TodoList from './components/TodoList'
 import ProgressBar from './components/ProgressBar'
@@ -27,7 +27,7 @@ import NewGoods from './components/NewGoods'
 export default {
 	name: 'Dashboard',
 	components: {
-		Statistic,
+		Statistics,
 		LineChart,
 		TodoList,
 		ProgressBar,

@@ -176,8 +176,10 @@ export default {
 
 <style lang="scss" scoped>
 .article-edit {
-	background-color: #fff;
+	min-height: 100%;
 	padding: 1em;
+	box-sizing: border-box;
+	background-color: #fff;
 
 	.article-edit__header {
 		display: flex;

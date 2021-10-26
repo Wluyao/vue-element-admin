@@ -3,10 +3,10 @@
 		class="user-edit"
 		:title="detail.id ? '编辑用户' : '新增用户'"
 		width="700px"
-		:visible.sync="visible"
+		:visible="visible"
 		:confirm-loading="confirmLoading"
 		@confirm="handleConfirm"
-		@close="handleClose"
+		@close="handleBeforeClose"
 	>
 		<el-form ref="form" :model="detail" :rules="formRules" label-width="70px" v-loading="initLoading">
 			<el-form-item label="账号:" prop="account">
@@ -139,8 +139,8 @@ export default {
 			tableMng,
 			formRules,
 			visible: false,
-			userInfoBackup: _.cloneDeep(defaultDetail),
-			detail: _.cloneDeep(defaultDetail),
+			detail: {},
+			detailBackup: {},
 			confirmLoading: false,
 			initLoading: false,
 		}
@@ -148,12 +148,16 @@ export default {
 	methods: {
 		// 打开模态窗
 		open(data = {}) {
-			this.toggleVisible()
-			this.detail = { ...this.detail, ...data }
+			this.visible = true
+			this.changeDetail(data)
 			this.getDetail()
 		},
 		toggleVisible() {
 			this.visible = !this.visible
+		},
+		changeDetail(data) {
+			this.detail = { ...defaultDetail, ...data }
+			this.detailBackup = { ...defaultDetail, ...data }
 		},
 		// 获取用户详情
 		async getDetail() {
@@ -162,8 +166,7 @@ export default {
 			this.initLoading = true
 			try {
 				const res = await api.user.getDetail({ id })
-				this.detail = _.cloneDeep(res)
-				this.detailBackup = _.cloneDeep(res)
+				this.changeDetail(res)
 			} catch (err) {
 				console.error(err)
 			} finally {
@@ -189,21 +192,20 @@ export default {
 				}
 			})
 		},
-		handleClose() {
+		handleBeforeClose() {
 			if (window.JSON.stringify(this.detailBackup) === window.JSON.stringify(this.detail)) {
 				this.handleClose()
 			} else {
 				this.$confirm('信息修改后未提交，确认关闭？', '提示', {
 					type: 'warning',
 				})
-					.then(() => {
-						this.$refs.form.clearValidate()
-						this.visible = false
-						this.detail = _.cloneDeep(defaultDetail)
-						this.detailBackup = _.cloneDeep(defaultDetail)
-					})
+					.then(this.handleClose)
 					.catch(() => {})
 			}
+		},
+		handleClose() {
+			this.$refs.form.clearValidate()
+			this.visible = false
 		},
 	},
 }

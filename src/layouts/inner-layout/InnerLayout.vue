@@ -6,7 +6,7 @@
 			<header-bar></header-bar>
 			<nav-tag v-show="tagVisible"></nav-tag>
 
-			<div class="inner-layout__page" :class="{ 'with-navtag': tagVisible }">
+			<div class="inner-layout__page">
 				<transition name="page" mode="out-in">
 					<keep-alive :include="cachePages">
 						<router-view :key="key"></router-view>
@@ -46,21 +46,19 @@ export default {
 	overflow-y: hidden;
 
 	.inner-layout__main {
-		width: 100%;
+		flex: auto;
+		display: flex;
+		flex-direction: column;
 		overflow-x: hidden;
 		background-color: #f0f2f5;
 
 		.inner-layout__page {
+			flex: auto;
 			position: relative;
 			box-sizing: border-box;
-			height: calc(100vh - 50px);
 			overflow-x: hidden;
 			overflow-y: auto;
 			padding: 1em;
-
-			&.with-navtag {
-				height: calc(100vh - 90px);
-			}
 
 			.page {
 				&-enter {

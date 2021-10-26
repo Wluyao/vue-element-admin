@@ -194,8 +194,10 @@ export default {
 
 <style lang="scss" scoped>
 .article-list {
-	background-color: #fff;
+	min-height: 100%;
 	padding: 1em;
+	box-sizing: border-box;
+	background-color: #fff;
 
 	.article-list__header {
 		display: flex;

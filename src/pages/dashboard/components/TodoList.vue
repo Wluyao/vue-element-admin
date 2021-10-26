@@ -86,7 +86,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .dashboard-todolist {
-	.dashboard-todolist__header {
+	&__header {
 		font-size: 16px;
 	}
 
