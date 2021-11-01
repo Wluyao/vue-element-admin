@@ -4,7 +4,7 @@ const localKeyName = [
 	'repay_mode',
 ]
 
-// 项目中所有存储在localStorage中的数据的名称
+// 项目中所有存储在sessionStorage中的数据的名称
 const sessionKeyName = [
 	// 还款方式。 free:自由还，day：按天还，month：按月还
 	'repay_mode',
