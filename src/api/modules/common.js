@@ -1,4 +1,3 @@
-import service from '@/utils/service'
+import request from '@/utils/request'
 
-// 获取基础数据表
-export const getBaseTable = () => service.get('/baseTable')
+

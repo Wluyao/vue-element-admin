@@ -1,5 +1,5 @@
 const state = {
-  list: []
-};
+	list: [],
+}
 
-export default state;
+export default state

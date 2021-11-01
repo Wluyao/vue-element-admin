@@ -1,56 +1,3 @@
-/**
- * 业务工具方法
- */
-
-
-// 计算模糊时间
-
-// type默认为pass表示计算经过了多少时间
-export function getSimpleTime(date, type = 'pass', simple = '') {
-  const second = 1000;
-  const minute = second * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
-  const month = day * 30;
-  const year = month * 12;
-  const now = new Date();
-  const target = new Date(date);
-  let interval = 0;
-  let simpleTime = '';
-  if (type === 'pass') {
-    interval = now - target;
-  } else {
-    interval = target - now;
-  }
-  if (interval < 0) {
-    if (type === 'pass') {
-      simpleTime = simple || '未开始';
-    } else {
-      simpleTime = simple || '已结束';
-    }
-  } else if (0 < interval && interval <= minute) {
-    simpleTime = Math.floor(interval / second) + '秒';
-  } else if (minute < interval && interval <= hour) {
-    simpleTime = Math.floor(interval / minute) + '分钟';
-  } else if (hour < interval && interval <= day) {
-    simpleTime = Math.floor(interval / hour) + '小时';
-  } else if (day < interval && interval <= month) {
-    simpleTime = Math.floor(interval / day) + '天';
-  } else if (month < interval && interval <= year) {
-    simpleTime = Math.floor(interval / month) + '月';
-  } else if (year < interval) {
-    simpleTime = Math.floor(interval / year) + '年';
-  } else {
-    simpleTime = `${target.getFullYear()}-${target.getMonth()}-${target.getDate()}`;
-  }
-  if (interval > 0 && type === 'pass') {
-    simpleTime = simpleTime + '前';
-  }
-  return simpleTime;
-}
-
-
-
 // 将数值使用逗号隔开，一般用于金额的输入
 export function getCommaNumber(value) {
   const list = value.toString().split('.');
@@ -70,7 +17,7 @@ export function getCommaNumber(value) {
 
 
 // 将金额转换为中文大写
-const moneyToCN = (n = 0) => {
+export const moneyToCN = (n = 0) => {
   const fraction = ["角", "分"];
   const digit = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
   const unit = [

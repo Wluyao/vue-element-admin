@@ -1,7 +1,7 @@
-import service from '@/utils/service'
+import request from '@/utils/request'
 
-export const getGridData = () => service.get('/dashboard/grid')
+export const getGridData = () => request.get('/dashboard/grid')
 
-export const getLineChartData = data => service.get('/dashboard/lineChart', data)
+export const getLineChartData = data => request.get('/dashboard/lineChart', data)
 
-export const getTodoListData = () => service.get('/dashboard/todoList')
+export const getTodoListData = () => request.get('/dashboard/todoList')

@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import store from '@/store'
 
-class Service {
+class Request {
 	baseConfig = {
 		baseURL: '/sysapi',
 		headers: {},
@@ -13,10 +12,10 @@ class Service {
 	instance = null
 
 	constructor() {
-		const token = store.getters.token
+		const token = sessionStorage.getItem('token')
 		if (token) {
 			this.setHeader({
-				Authorization: store.getters.tokenType + ' ' + token,
+				Authorization: token,
 			})
 		} else {
 			this.initInstance()
@@ -108,6 +107,6 @@ class Service {
 	}
 }
 
-const service = new Service()
+const request = new Request()
 
-export default service
+export default request

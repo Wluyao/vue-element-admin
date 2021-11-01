@@ -66,12 +66,10 @@
 				</el-table-column>
 				<el-table-column prop="roles" label="角色">
 					<template slot-scope="scope">
-						<span v-for="(role, index) in scope.row.roles" :key="role">
-							{{ tableMng.getNameById('role', role) }}
-							<span v-if="scope.row.roles.length !== index + 1">,</span>
-						</span>
+						{{ tableMng.getNamesByIds('role', scope.row.roles) }}
 					</template>
 				</el-table-column>
+				<!--TODO 后端排序 -->
 				<el-table-column prop="createDate" label="创建时间" sortable> </el-table-column>
 				<el-table-column prop="consume" label="累计消费额(元)" width="160px" sortable></el-table-column>
 				<el-table-column label="操作" width="120px">

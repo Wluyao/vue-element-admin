@@ -1,9 +1,9 @@
-import types from "./mutation-types";
+import types from './mutation-types'
 
 const mutations = {
-  [types.SET_LIST](state, data = []) {
-    state.list = data;
-  }
-};
+	[types.SET_LIST](state, data = []) {
+		state.list = data
+	},
+}
 
-export default mutations;
+export default mutations

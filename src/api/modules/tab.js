@@ -1,3 +1,3 @@
-import service from '@/utils/service'
+import request from '@/utils/request'
 
-export const getList = data => service.get('/tab/list', data)
+export const getList = data => request.get('/tab/list', data)
