@@ -47,12 +47,11 @@ export default {
 			this.$store.commit('SET_SIDE_COLLAPSE', !this.sideCollapse)
 		},
 		// 退出登录
-		handleCommand(command) {
+		async handleCommand(command) {
 			if (command === 'logout') {
-				this.$store.dispatch('logout').then(() => {
-					resetRouter()
-					this.$router.replace('/account/login')
-				})
+				await this.$store.dispatch('logout')
+				resetRouter()
+				this.$router.replace('/account/login')
 			}
 		},
 	},

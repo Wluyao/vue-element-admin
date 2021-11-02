@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
+import domain from '@/config/domain'
 
 class Request {
 	baseConfig = {
-		baseURL: '/sysapi',
+		baseURL: domain,
 		headers: {},
 		timeout: 8000,
 	}

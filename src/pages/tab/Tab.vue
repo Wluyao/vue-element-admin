@@ -4,7 +4,7 @@
 		<el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
 			<el-tab-pane v-for="tab in tabOptions" :key="tab.name" :label="tab.label" :name="tab.name">
 				<keep-alive>
-					<tab-pane v-if="activeName === tab.name" :name="tab.name" />
+					<tab-pane v-if="activeName === tab.name" :tab-name="tab.name"></tab-pane>
 				</keep-alive>
 			</el-tab-pane>
 		</el-tabs>

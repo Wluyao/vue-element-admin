@@ -112,7 +112,7 @@ yarn
 
 #### 运行
 ```
-yarn start
+yarn serve
 ```
 
 #### 构建

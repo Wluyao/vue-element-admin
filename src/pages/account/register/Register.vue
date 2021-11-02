@@ -182,19 +182,16 @@ export default {
 		},
 		handleRegister() {
 			this.registerLoading = true
-			this.$refs.form.validate(async valid => {
+			this.$refs.form.validate(async (valid) => {
 				if (valid) {
 					await this.$api.account.register(this.accountInfo)
 					this.$message.success('注册成功！')
-					this.$store
-						.dispatch('Login', {
-							username: this.accountInfo.username,
-							password: this.accountInfo.password,
-						})
-						.then(() => {
-							this.$router.replace('/')
-							this.registerLoading = false
-						})
+					await this.$store.dispatch('login', {
+						username: this.accountInfo.username,
+						password: this.accountInfo.password,
+					})
+					this.$router.replace('/')
+					this.registerLoading = false
 				} else {
 					this.$message.warning('请按正确格式填写信息')
 					this.registerLoading = false

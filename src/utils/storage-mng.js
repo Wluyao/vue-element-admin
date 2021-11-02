@@ -1,14 +1,19 @@
-// 项目中所有存储在localStorage中的数据的名称
+// 项目中所有存储在localStorage中的数据
 const localKeyName = [
-	// 还款方式。 free:自由还，day：按天还，month：按月还
-	'repay_mode',
+	// 主题色
+	'theme',
+	//  是否折叠侧边菜单
+	'sideCollapse',
+	// 是否显示顶部页面tag标签
+	'tagVisible',
+	// 系统风格 round,square
+	'style',
+	// 组件大小
+	'size',
 ]
 
-// 项目中所有存储在sessionStorage中的数据的名称
-const sessionKeyName = [
-	// 还款方式。 free:自由还，day：按天还，month：按月还
-	'repay_mode',
-]
+// 项目中所有存储在sessionStorage中的数据
+const sessionKeyName = []
 
 class StorageMng {
 	// key名称前缀
@@ -25,18 +30,17 @@ class StorageMng {
 		try {
 			this.mode.setItem(`${this.prefix}${keyName}`, JSON.stringify(value))
 		} catch (err) {
-			console.warn(`Storage ${keyName} set error`, err)
+			this.mode.setItem(`${this.prefix}${keyName}`, value)
 		}
 	}
 
 	getItem(keyName) {
 		const result = this.mode.getItem(`${this.prefix}${keyName}`)
 		try {
-			return result ? JSON.parse(result) : result
+			return JSON.parse(result)
 		} catch (err) {
 			console.warn(`Storage ${keyName} get error`, err)
-			// 如果parse错误，代表这个存储错误，认为就是没有这个存储，保持和没存储的表现一致，返回 null
-			return null
+			return result
 		}
 	}
 
@@ -57,7 +61,7 @@ class StorageMng {
 		const keys = []
 		Array.from({ length: this.mode.length }).forEach((item, index) => {
 			const keyName = this.mode.key(index)
-			if (keyName?.startsWith(this.prefix)) {
+			if (keyName.startsWith(this.prefix)) {
 				keys.push(keyName.slice(this.prefix.length))
 			}
 		})

@@ -88,22 +88,21 @@ export default {
 		},
 		handleLogin() {
 			this.loginLoading = true
-			this.$refs.loginForm.validate(valid => {
+			this.$refs.loginForm.validate(async valid => {
 				if (valid) {
 					const account = {
 						username: this.loginForm.username,
 						password: encryptByDES(this.loginForm.password, '123456781111'),
 					}
-					this.$store
-						.dispatch('Login', account)
-						.then(() => {
-							this.$router.replace('/').catch(err => {})
-							this.loginLoading = false
-						})
-						.catch(error => {
-							this.$message.error('登录失败,请填写正确的信息！')
-							this.loginLoading = false
-						})
+					try {
+						await this.$store.dispatch('login', account)
+						this.$router.replace('/').catch(() => {})
+					} catch (err) {
+						console.error(err)
+						this.$message.error('登录失败,请填写正确的信息！')
+					} finally {
+						this.loginLoading = false
+					}
 				} else {
 					this.$message.error('登录失败,请填写正确的信息！')
 					this.loginLoading = false

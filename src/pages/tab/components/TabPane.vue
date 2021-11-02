@@ -9,10 +9,9 @@
 </template>
 
 <script>
-
 export default {
 	props: {
-		name: {
+		tabName: {
 			required: true,
 			type: String,
 		},
@@ -29,7 +28,7 @@ export default {
 	methods: {
 		async getList() {
 			this.tabLoading = true
-			const data = await this.api.tab.getList({ name: this.name })
+			const data = await this.$api.tab.getList({ name: this.tabName })
 			this.tableData = data
 			this.tabLoading = false
 		},
