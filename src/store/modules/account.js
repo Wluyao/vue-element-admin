@@ -1,6 +1,6 @@
 import api from '@/api'
 
-const account = {
+export default {
 	state: {
 		token: sessionStorage.getItem('token'),
 		userInfo: {},
@@ -49,4 +49,3 @@ const account = {
 		},
 	},
 }
-export default account

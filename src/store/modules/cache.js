@@ -1,4 +1,4 @@
-const cache = {
+export default {
 	state: {
 		// 需要缓存的页面
 		cachePages: [],
@@ -14,4 +14,3 @@ const cache = {
 		},
 	},
 }
-export default cache

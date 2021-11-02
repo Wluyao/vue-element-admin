@@ -1,7 +1,7 @@
 import uiConfig from '@/config/ui'
 import { localMng } from '@/utils/storage-mng'
 
-const setting = {
+export default  {
 	state: {
 		theme: localMng.getItem('theme') || uiConfig.theme,
 		sideCollapse: localMng.getItem('sideCollapse') || uiConfig.sideCollapse,
@@ -33,4 +33,3 @@ const setting = {
 	},
 }
 
-export default setting

@@ -21,7 +21,7 @@
 
 <script>
 /**
- * 内部布局(未登录)
+ * 内部布局(已登录)
  */
 import { HeaderBar, SideBar, NavTag, Setting } from './components'
 import { mapGetters } from 'vuex'

@@ -28,19 +28,18 @@ class StorageMng {
 
 	setItem(keyName, value) {
 		try {
-			this.mode.setItem(`${this.prefix}${keyName}`, JSON.stringify(value))
+			this.mode.setItem(`${this.prefix}${keyName}`, window.JSON.stringify(value))
 		} catch (err) {
-			this.mode.setItem(`${this.prefix}${keyName}`, value)
+			console.warn(`Storage ${keyName} set error`, err)
 		}
 	}
 
 	getItem(keyName) {
 		const result = this.mode.getItem(`${this.prefix}${keyName}`)
 		try {
-			return JSON.parse(result)
+			return result ? window.JSON.parse(result) : result
 		} catch (err) {
 			console.warn(`Storage ${keyName} get error`, err)
-			return result
 		}
 	}
 

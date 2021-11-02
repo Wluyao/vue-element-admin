@@ -1,4 +1,4 @@
-const getters = {
+export default {
 	token: state => state.account.token,
 	userInfo: state => state.account.userInfo,
 	routeMap: state => state.account.routeMap,
@@ -9,5 +9,3 @@ const getters = {
 	style: state => state.setting.style,
 	size: state => state.setting.size,
 }
-
-export default getters
