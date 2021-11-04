@@ -1,0 +1,17 @@
+.article-list[data-v-0a82d59f] {
+  min-height: 100%;
+  padding: 1em;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.article-list .article-list__header[data-v-0a82d59f] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.article-list .article-list__header .title[data-v-0a82d59f],
+    .article-list .article-list__header .operation[data-v-0a82d59f] {
+      margin-bottom: 1em;
+}
+
