@@ -15,7 +15,6 @@ export const admin = [
 	'Permission',
 	'User',
 	'Article',
-	'Pdf',
 	'Other',
 	'404',
 ]

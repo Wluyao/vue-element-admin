@@ -1,15 +1,13 @@
 <template>
 	<div class="outer-layout">
 		<div class="outer-layout__header">
-			<icon name="logo" :size="36"></icon>
+			<base-icon name="logo" :size="36"></base-icon>
 			<span>后台管理系统</span>
 		</div>
 
 		<div class="outer-layout__page">
 			<router-view></router-view>
 		</div>
-
-		<style-setting class="style-setting"></style-setting>
 	</div>
 </template>
 
@@ -17,11 +15,10 @@
 /**
  * 外部布局(未登录)
  */
-import StyleSetting from '@/components/business/setting/style-setting'
 
 export default {
-	components: {
-		StyleSetting,
+	data() {
+		return {}
 	},
 }
 </script>
@@ -43,10 +40,6 @@ export default {
 		width: 440px;
 		margin: 0 auto;
 		margin-top: 60px;
-	}
-
-	.style-setting {
-		display: none;
 	}
 }
 </style>

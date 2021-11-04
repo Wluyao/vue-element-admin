@@ -2,21 +2,14 @@ import 'babel-polyfill'
 import Vue from 'vue'
 import dayjs from 'dayjs'
 import ElementUI from 'element-ui'
-import reminder from './components/base/reminder'
-
+import reminder from './components/base/Reminder'
 import App from './App'
 import router from './router'
 import store from './store'
-
-import './assets/styles/app.scss'
-import '@/assets/icons'
-
-// mock数据
-import './mock'
-
 import api from './api'
-
-// 全局注册的组件、指令、过滤器
+import './assets/styles/app.scss'
+import './assets/icons'
+import './mock'
 import './components'
 import './directive'
 import './filters'

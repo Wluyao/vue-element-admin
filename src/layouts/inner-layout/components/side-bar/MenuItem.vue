@@ -2,7 +2,7 @@
   <div class="menu-item">
     <el-submenu v-if="config.children" :index="config.path">
       <template slot="title">
-        <icon v-if="config.icon" :name="config.icon" icon-class="menu-icon"></icon>
+        <base-icon v-if="config.icon" :name="config.icon" icon-class="menu-icon"></base-icon>
         <span>{{ config.title }}</span>
       </template>
       <menu-item
@@ -13,7 +13,7 @@
     </el-submenu>
 
     <el-menu-item v-else :index="config.path">
-      <icon v-if="config.icon" :name="config.icon" icon-class="menu-icon"></icon>
+      <base-icon v-if="config.icon" :name="config.icon" icon-class="menu-icon"></base-icon>
       <span slot="title">{{ config.title }}</span>
     </el-menu-item>
   </div>

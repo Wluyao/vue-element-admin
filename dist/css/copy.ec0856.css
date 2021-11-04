@@ -1,0 +1,20 @@
+.content[data-v-15ee943a] {
+  border: 1px solid #d9d9d9;
+  padding: 1em;
+  text-indent: 2em;
+  margin-bottom: 1em;
+}
+.copy-directive section[data-v-15ee943a] {
+  padding: 1em 0;
+}
+.copy-directive .copy-directive__content[data-v-15ee943a] {
+  padding: 1em;
+  text-align: center;
+  border: 1px solid #d9d9d9;
+  cursor: pointer;
+  margin-bottom: 1em;
+}
+.copy-directive .red[data-v-15ee943a] {
+  color: #f56c6c;
+}
+

@@ -14,8 +14,6 @@
 				</transition>
 			</div>
 		</div>
-
-		<setting></setting>
 	</div>
 </template>
 
@@ -23,11 +21,11 @@
 /**
  * 内部布局(已登录)
  */
-import { HeaderBar, SideBar, NavTag, Setting } from './components'
+import { HeaderBar, SideBar, NavTag } from './components'
 import { mapGetters } from 'vuex'
 
 export default {
-	components: { HeaderBar, SideBar, NavTag, Setting },
+	components: { HeaderBar, SideBar, NavTag },
 	computed: {
 		...mapGetters(['tagVisible', 'cachePages']),
 		// 创建文章以及所有的编辑文章都是共用的ArticleEdit组件,所以对应的路由不能使用keep-alive缓存。

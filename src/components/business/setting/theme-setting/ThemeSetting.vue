@@ -1,7 +1,5 @@
 <template>
-	<el-tooltip effect="dark" content="换肤" placement="bottom">
-		<el-color-picker popper-class="theme-setting" v-model="theme" :predefine="predefineThemes" size="small" />
-	</el-tooltip>
+	<el-color-picker popper-class="theme-setting" v-model="theme" :predefine="predefineThemes" size="small" />
 </template>
 
 <script>

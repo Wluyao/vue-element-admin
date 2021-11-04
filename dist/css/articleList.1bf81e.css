@@ -1,0 +1,20 @@
+.article-list[data-v-31ccb76e] {
+  min-height: 100%;
+  padding: 1em;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.article-list .article-list__header[data-v-31ccb76e] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.article-list .article-list__header .title[data-v-31ccb76e],
+    .article-list .article-list__header .operation[data-v-31ccb76e] {
+      margin-bottom: 1em;
+}
+.article-list .article-list__table[data-v-31ccb76e] {
+    margin-bottom: 1em;
+}
+

@@ -12,7 +12,6 @@ import errorRoute from './modules/error'
 import formRoute from './modules/form'
 import mineRoute from './modules/mine'
 import otherRoute from './modules/other'
-import pdfRoute from './modules/pdf'
 import permissionRoute from './modules/permission'
 import reloadRoute from './modules/reload'
 import tabRoute from './modules/tab'
@@ -45,7 +44,6 @@ const dynamicRouteMap = [
 	errorRoute,
 	userRoute,
 	articleRoute,
-	pdfRoute,
 	otherRoute,
 	{
 		name: '404',
@@ -59,7 +57,7 @@ const dynamicRouteMap = [
 
 const createRouter = () =>
 	new VueRouter({
-		// mode: 'history',    //需要服务端支持
+		// mode: 'history',
 		routes: staticRouteMap,
 		scrollBehavior(to, from, savedPosition) {
 			// 本项目布局使用的是.inner-layout__page滚动，scrollBehavior返回的位置是指window的滚动，所有滚动不会生效。

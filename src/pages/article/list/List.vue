@@ -209,9 +209,5 @@ export default {
 			margin-bottom: 1em;
 		}
 	}
-
-	.article-list__table {
-		margin-bottom: 1em;
-	}
 }
 </style>

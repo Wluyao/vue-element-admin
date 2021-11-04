@@ -1,7 +1,7 @@
 <template>
 	<div class="side-bar-logo" :class="{ collapse: sideCollapse }">
 		<router-link class="link" to="/">
-			<icon name="logo" :size="24"></icon>
+			<base-icon name="logo" :size="24"></base-icon>
 			<span v-show="!sideCollapse">后台管理系统</span>
 		</router-link>
 	</div>

@@ -6,8 +6,7 @@
 			</div>
 		</div>
 
-		<!-- 竖直滚动条 -->
-		<Bar
+		<bar
 			ref="vertical"
 			:size="size"
 			:color="color"
@@ -15,10 +14,9 @@
 			:clientSize="clientHeight"
 			:scrollSize="scrollHeight"
 			@onManualScroll="handleManualScroll"
-		/>
+		></bar>
 
-		<!-- 水平滚动条 -->
-		<Bar
+		<bar
 			ref="horizontal"
 			:vertical="false"
 			:size="size"
@@ -27,11 +25,14 @@
 			:clientSize="clientWidth"
 			:scrollSize="scrollWidth"
 			@onManualScroll="handleManualScroll"
-		/>
+		></bar>
 	</div>
 </template>
 
 <script>
+/**
+ * 滚动条
+ */
 import Bar from './Bar'
 import getScrollbarWidth from './util'
 // element直接提供

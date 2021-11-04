@@ -21,13 +21,8 @@
 </template>
 
 <script>
-import TextOverflow from '@/components/base/text-overflow'
-
 export default {
 	name: 'TextOverflowDemo',
-	components: {
-		TextOverflow,
-	},
 	data() {
 		return {
 			text1: '超出30个字显示省略号超出30个字显示省略号超出30个字显示省略号超出30个字显示省略号超出30个字显示省略号',

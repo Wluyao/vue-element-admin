@@ -227,9 +227,5 @@ export default {
 			margin-bottom: 1em;
 		}
 	}
-
-	.user-manager__table {
-		margin-bottom: 1em;
-	}
 }
 </style>
