@@ -175,8 +175,7 @@ export default {
 			this.submitLoading = true
 			this.$refs.form.validate(async valid => {
 				if (valid) {
-					const formData = this.formData
-					await api.account.modifyPassword(this.formData)
+					await api.account.updatePassword(this.formData)
 					this.$message.success('修改成功,请使用新密码进行登录')
 					this.$router.replace('/')
 					this.submitLoading = false

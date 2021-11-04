@@ -37,75 +37,76 @@ const articleData = Mock.mock({
 
 const table = articleData.list
 
-export default {
-	getList(config) {
-		const { type = '', author = '', pageNumber = 1, pageSize = table.length, name = '' } = getURLParams(config.url)
-		const types = type.split(',')
-		const typesLength = types.length
-		const result = table.filter(item => {
-			let validAuthor = false
-			let validType = false
-			let validName = false
+export const getList = config => {
+	const { type = '', author = '', pageNumber = 1, pageSize = table.length, name = '' } = getURLParams(config.url)
+	const types = type.split(',')
+	const typesLength = types.length
+	const result = table.filter(item => {
+		let validAuthor = false
+		let validType = false
+		let validName = false
 
-			if (typesLength === 0) {
-				validType = true
-			} else {
-				validType = types.some(item1 => {
-					return item.type.includes(item1)
-				})
-			}
-			validName = item.name.includes(name)
-			validAuthor = item.author.includes(author)
-			return validAuthor && validName && validType
-		})
-		const startNumber = (Number(pageNumber) - 1) * Number(pageSize)
-		const endNumber = startNumber + Number(pageSize)
-		return {
-			code: 200,
-			data: {
-				list: util.filterFieldByTable(result.slice(startNumber, endNumber), [
-					'id',
-					'name',
-					'author',
-					'createDate',
-					'type',
-					'browseNum',
-				]),
-				total: result.length,
-			},
+		if (typesLength === 0) {
+			validType = true
+		} else {
+			validType = types.some(item1 => {
+				return item.type.includes(item1)
+			})
 		}
-	},
-	getDetail(config) {
-		const { id } = getURLParams(config.url)
-		// 刷新编辑页面时会重新Mock数据，根据之前的id找不到对应的文章
-		const detail = util.find(table, id) || table[0]
-		return {
-			code: 200,
-			data: detail,
+		validName = item.name.includes(name)
+		validAuthor = item.author.includes(author)
+		return validAuthor && validName && validType
+	})
+	const startNumber = (Number(pageNumber) - 1) * Number(pageSize)
+	const endNumber = startNumber + Number(pageSize)
+	return {
+		code: 200,
+		data: {
+			list: util.pickFromTable(result.slice(startNumber, endNumber), [
+				'id',
+				'name',
+				'author',
+				'createDate',
+				'type',
+				'browseNum',
+			]),
+			total: result.length,
+		},
+	}
+}
+
+export const getDetail = config => {
+	const { id } = getURLParams(config.url)
+	// 刷新编辑页面时会重新Mock数据，根据之前的id找不到对应的文章
+	const detail = util.find(table, id) || table[0]
+	return {
+		code: 200,
+		data: detail,
+	}
+}
+
+export const update = config => {
+	const { detail } = window.JSON.parse(config.body)
+	if (!detail.id) {
+		const initRow = {
+			createDate: Date.now(),
+			browseNum: 0,
+			author: '本人',
 		}
-	},
-	update(config) {
-		const { detail } = window.JSON.parse(config.body)
-		if (!detail.id) {
-			const initRow = {
-				createDate: Date.now(),
-				browseNum: 0,
-				author: '本人',
-			}
-			Object.assign(detail, initRow)
-		}
-		util.update(table, detail)
-		return {
-			code: 200,
-			data: {},
-		}
-	},
-	remove(config) {
-		const { id } = window.JSON.parse(config.body)
-		util.remove(table, id)
-		return {
-			code: 200,
-			data: {},
-		}
-	},
+		Object.assign(detail, initRow)
+	}
+	util.update(table, detail)
+	return {
+		code: 200,
+		data: {},
+	}
+}
+
+export const remove = config => {
+	const { id } = window.JSON.parse(config.body)
+	util.remove(table, id)
+	return {
+		code: 200,
+		data: {},
+	}
 }

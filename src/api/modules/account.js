@@ -16,4 +16,4 @@ export const register = data => request.post('/account/register', data)
 export const getCaptcha = data => request.post('/account/captcha', data)
 
 //  修改密码
-export const modifyPassword = data => request.post('/account/modifyPassword', data)
+export const updatePassword = data => request.post('/account/updatePassword', data)
