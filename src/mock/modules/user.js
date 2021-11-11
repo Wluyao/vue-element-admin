@@ -22,7 +22,7 @@ const userData = Mock.mock({
 
 const table = userData.list
 
-export const getList = config => {
+const getList = config => {
 	const { name = '', pageNumber = 1, pageSize = table.length } = getURLParams(config.url)
 	const result = table.filter(row => {
 		let validName = false
@@ -49,7 +49,7 @@ export const getList = config => {
 	}
 }
 
-export const getDetail = config => {
+const getDetail = config => {
 	const { id } = getURLParams(config.url)
 	return {
 		code: 200,
@@ -57,7 +57,7 @@ export const getDetail = config => {
 	}
 }
 
-export const update = config => {
+const update = config => {
 	const { detail } = window.JSON.parse(config.body)
 	if (!detail.id) {
 		const initRow = {
@@ -73,7 +73,7 @@ export const update = config => {
 	}
 }
 
-export const remove = config => {
+const remove = config => {
 	const { id } = window.JSON.parse(config.body)
 	util.remove(table, id)
 	return {
@@ -81,3 +81,8 @@ export const remove = config => {
 		data: {},
 	}
 }
+
+Mock.mock(/\/user\/list/, 'get', getList)
+Mock.mock(/\/user\/detail/, 'get', getDetail)
+Mock.mock(/\/user\/update/, 'post', update)
+Mock.mock(/\/user\/remove/, 'post', remove)

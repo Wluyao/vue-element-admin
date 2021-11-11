@@ -37,7 +37,7 @@ const articleData = Mock.mock({
 
 const table = articleData.list
 
-export const getList = config => {
+const getList = config => {
 	const { type = '', author = '', pageNumber = 1, pageSize = table.length, name = '' } = getURLParams(config.url)
 	const types = type.split(',')
 	const typesLength = types.length
@@ -75,7 +75,7 @@ export const getList = config => {
 	}
 }
 
-export const getDetail = config => {
+const getDetail = config => {
 	const { id } = getURLParams(config.url)
 	// 刷新编辑页面时会重新Mock数据，根据之前的id找不到对应的文章
 	const detail = util.find(table, id) || table[0]
@@ -85,7 +85,7 @@ export const getDetail = config => {
 	}
 }
 
-export const update = config => {
+const update = config => {
 	const { detail } = window.JSON.parse(config.body)
 	if (!detail.id) {
 		const initRow = {
@@ -102,7 +102,7 @@ export const update = config => {
 	}
 }
 
-export const remove = config => {
+const remove = config => {
 	const { id } = window.JSON.parse(config.body)
 	util.remove(table, id)
 	return {
@@ -110,3 +110,8 @@ export const remove = config => {
 		data: {},
 	}
 }
+
+Mock.mock(/\/article\/list/, 'get', getList)
+Mock.mock(/\/article\/detail/, 'get', getDetail)
+Mock.mock(/\/article\/update/, 'post', update)
+Mock.mock(/\/article\/remove/, 'post', remove)

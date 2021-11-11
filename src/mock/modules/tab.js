@@ -49,7 +49,7 @@ const fourthData = Mock.mock({
 	],
 })
 
-export const getList = config => {
+const getList = config => {
 	const { name } = getURLParams(config.url)
 	let data = {}
 	switch (name) {
@@ -73,3 +73,5 @@ export const getList = config => {
 		data,
 	}
 }
+
+Mock.mock(/\/tab\/list/, 'get', getList)

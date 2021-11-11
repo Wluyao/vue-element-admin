@@ -40,14 +40,14 @@ const todoListData = Mock.mock({
 	],
 })
 
-export const getGridData = () => {
+const getGridData = () => {
 	return {
 		code: 200,
 		data: gridData,
 	}
 }
 
-export const getLineChartData = config => {
+const getLineChartData = config => {
 	const { type } = getURLParams(config.url)
 	let data = {}
 	if (type === 'week') {
@@ -65,9 +65,13 @@ export const getLineChartData = config => {
 	}
 }
 
-export const getTodoListData = () => {
+const getTodoListData = () => {
 	return {
 		code: 200,
 		data: todoListData.list,
 	}
 }
+
+Mock.mock(/\/dashboard\/grid/, 'get', getGridData)
+Mock.mock(/\/dashboard\/lineChart/, 'get', getLineChartData)
+Mock.mock(/\/dashboard\/todoList/, 'get', getTodoListData)

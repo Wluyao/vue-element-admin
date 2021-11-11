@@ -14,7 +14,7 @@ const userInfo = Mock.mock({
 	roles: ['admin'],
 })
 
-export const login = config => {
+const login = config => {
 	const { username } = JSON.parse(config.body)
 	if (username === 'editor') {
 		loginInfo.token = 'd02fd62b-cfdf-9efb-adfb-7fc1e85bf99c'
@@ -29,14 +29,14 @@ export const login = config => {
 	}
 }
 
-export const logout = () => {
+const logout = () => {
 	return {
 		code: 200,
 		data: {},
 	}
 }
 
-export const getUserInfo = config => {
+const getUserInfo = config => {
 	const { token } = JSON.parse(config.body)
 	if (token === 'd02fd62b-cfdf-9efb-adfb-7fc1e85bf99c') {
 		userInfo.roles = ['editor']
@@ -51,23 +51,30 @@ export const getUserInfo = config => {
 	}
 }
 
-export const getCaptcha = config => {
+const getCaptcha = config => {
 	return {
 		code: 200,
 		data: {},
 	}
 }
 
-export const register = config => {
+const register = config => {
 	return {
 		code: 200,
 		data: {},
 	}
 }
 
-export const updatePassword = config => {
+const updatePassword = config => {
 	return {
 		code: 200,
 		data: {},
 	}
 }
+
+Mock.mock(/\/account\/login/, 'post', login)
+Mock.mock(/\/account\/logout/, 'post', logout)
+Mock.mock(/\/account\/userInfo/, 'post', getUserInfo)
+Mock.mock(/\/account\/captcha/, 'post', getCaptcha)
+Mock.mock(/\/account\/register/, 'post', register)
+Mock.mock(/\/account\/updatePassword/, 'post', updatePassword)

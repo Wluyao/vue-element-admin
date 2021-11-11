@@ -10,24 +10,26 @@
 		@close="handleClose"
 	>
 		<div slot="title" v-if="!title">
-			<slot name="title"></slot>
+			<slot name="title">{{ title }}</slot>
 		</div>
 
 		<slot></slot>
 
-		<div class="footer" :style="{ width: size }" v-if="showFooter">
-			<el-button v-if="showCancel" @click="handleClose">
-				{{ cancelText || '取消' }}
-			</el-button>
-			<el-button
-				v-if="showConfirm"
-				:type="danger ? 'danger' : 'primary'"
-				:disabled="confirmDisabled"
-				:loading="confirmLoading"
-				@click="handleConfirm"
-			>
-				{{ confirmText || '确认' }}
-			</el-button>
+		<div v-if="showFooter" class="footer" :style="{ width: size }">
+			<slot name="footer">
+				<el-button v-if="showCancel" @click="handleClose">
+					{{ cancelText || '取消' }}
+				</el-button>
+				<el-button
+					v-if="showConfirm"
+					:type="type"
+					:disabled="confirmDisabled"
+					:loading="confirmLoading"
+					@click="handleConfirm"
+				>
+					{{ confirmText || '确认' }}
+				</el-button>
+			</slot>
 		</div>
 	</el-drawer>
 </template>
@@ -46,7 +48,12 @@ export default {
 			default: '400px',
 		},
 		visible: Boolean,
-		danger: Boolean,
+		type: {
+			default: 'primary',
+			validator: function (value) {
+				return ['primary', 'danger', 'warning', 'info', 'success'].includes(value)
+			},
+		},
 		confirmText: String,
 		cancelText: String,
 		confirmLoading: Boolean,
