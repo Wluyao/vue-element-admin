@@ -1,4 +1,4 @@
-const setTitle = (el, text) => {
+const setTitle = (el, text = '-') => {
 	el.innerText = text
 	const isOverFlow = el.scrollWidth > el.clientWidth
 	if (isOverFlow) {
