@@ -1,9 +1,17 @@
 import Vue from 'vue'
+import _ from 'lodash'
 
-import copy from './copy'
-import dragDialog from './dragDialog'
-import permission from './permission'
+const directiveContext = require.context('./modules', false, /\.js$/)
 
-Vue.directive('copy', copy)
-Vue.directive('dragDialog', dragDialog)
-Vue.directive('permission', permission)
+directiveContext.keys().forEach(path => {
+	const directiveName = _.upperFirst(
+		_.camelCase(
+			path
+				.split('/')
+				.pop()
+				.replace(/\.\w+$/, '')
+		)
+	)
+	const directiveConfig = directiveContext(path)
+	Vue.directive(directiveName, directiveConfig.default)
+})

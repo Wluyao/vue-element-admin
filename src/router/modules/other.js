@@ -6,7 +6,6 @@ const AMap = () => import(/* webpackChunkName:'aMap' */ '@/pages/other/a-map')
 const DragDialog = () => import(/* webpackChunkName:'dragDialog' */ '@/pages/other/drag-dialog')
 const Copy = () => import(/* webpackChunkName:'copy' */ '@/pages/other/copy')
 const FileToBase64 = () => import(/* webpackChunkName:'fileToBase64' */ '@/pages/other/file-to-base64')
-const TextOverflow = () => import(/* webpackChunkName:'textOverflow' */ '@/pages/other/text-overflow')
 const Scrollbar = () => import(/* webpackChunkName:'scrollbar' */ '@/pages/other/scrollbar')
 
 const route = {
@@ -72,14 +71,6 @@ const route = {
 			component: FileToBase64,
 			meta: {
 				title: 'fileToBase64',
-			},
-		},
-		{
-			name: 'TextOverflowDemo',
-			path: '/other/text-overflow',
-			component: TextOverflow,
-			meta: {
-				title: '文本溢出',
 			},
 		},
 		{

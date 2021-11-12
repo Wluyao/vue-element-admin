@@ -15,5 +15,5 @@ componentContext.keys().forEach(path => {
 		)
 	)
 	const componentConfig = componentContext(path)
-	Vue.component(componentName, componentConfig.default || componentConfig)
+	Vue.component(componentName, componentConfig.default)
 })
