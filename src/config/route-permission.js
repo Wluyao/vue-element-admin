@@ -15,10 +15,10 @@ export const admin = [
 	'Permission',
 	'User',
 	'Article',
-	'Other',
+	'More',
 	'404',
 ]
 
-export const guest = ['Icon', 'Chart', 'Form', 'Excel', 'Tab', 'AMap', 'Error', 'Other', '404']
+export const guest = ['Icon', 'Chart', 'Form', 'Excel', 'Tab', 'AMap', 'Error', 'More', '404']
 
-export const editor = ['Article', 'Error', 'Other', '404']
+export const editor = ['Article', 'Error', 'More', '404']

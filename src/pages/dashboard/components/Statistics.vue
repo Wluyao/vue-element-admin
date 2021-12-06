@@ -32,7 +32,7 @@ export default {
 				},
 				{
 					type: 'user',
-					icon: 'user_filled',
+					icon: 'user-fill',
 					name: '用户数量',
 					number: 0,
 					backgroundColor: 'grid--blue',

@@ -11,7 +11,7 @@ import dashboardRoute from './modules/dashboard'
 import errorRoute from './modules/error'
 import formRoute from './modules/form'
 import mineRoute from './modules/mine'
-import otherRoute from './modules/other'
+import moreRoute from './modules/more'
 import permissionRoute from './modules/permission'
 import reloadRoute from './modules/reload'
 import tabRoute from './modules/tab'
@@ -44,7 +44,7 @@ const dynamicRouteMap = [
 	errorRoute,
 	userRoute,
 	articleRoute,
-	otherRoute,
+	moreRoute,
 	{
 		name: '404',
 		path: '*',

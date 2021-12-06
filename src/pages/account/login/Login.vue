@@ -25,8 +25,14 @@
 					@keyup.enter.native="handleLogin"
 					placeholder="请输入密码"
 				>
-					<base-icon name="password" slot="prefix" icon-class="icon"></base-icon>
-					<base-icon name="eye" slot="suffix" @click.native="showPwd" icon-class="icon icon-eye"></base-icon>
+					<base-icon slot="prefix" name="lock" icon-class="icon"></base-icon>
+
+					<base-icon
+						slot="suffix"
+						:name="passwordType === 'password' ? 'eye-close' : 'eye-open'"
+						icon-class="icon icon-eye"
+						@click.native="showPwd"
+					></base-icon>
 				</el-input>
 			</el-form-item>
 
