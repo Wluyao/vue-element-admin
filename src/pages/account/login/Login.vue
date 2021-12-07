@@ -4,15 +4,15 @@
 
 		<el-form
 			class="login__body"
-			ref="loginForm"
-			:model="loginForm"
-			:rules="loginRules"
+			ref="formRef"
+			:model="formData"
+			:rules="formRules"
 			auto-complete="on"
 			label-width="80px"
 			label-position="top"
 		>
 			<el-form-item label="账号" prop="username">
-				<el-input type="text" auto-complete="on" autofocus v-model="loginForm.username" placeholder="请输入账号">
+				<el-input type="text" auto-complete="on" autofocus v-model="formData.username" placeholder="请输入账号">
 					<base-icon name="user" slot="prefix" icon-class="icon"></base-icon>
 				</el-input>
 			</el-form-item>
@@ -21,12 +21,11 @@
 				<el-input
 					:type="passwordType"
 					auto-complete="on"
-					v-model="loginForm.password"
+					v-model="formData.password"
 					@keyup.enter.native="handleLogin"
 					placeholder="请输入密码"
 				>
 					<base-icon slot="prefix" name="lock" icon-class="icon"></base-icon>
-
 					<base-icon
 						slot="suffix"
 						:name="passwordType === 'password' ? 'eye-close' : 'eye-open'"
@@ -37,7 +36,7 @@
 			</el-form-item>
 
 			<el-form-item>
-				<el-checkbox v-model="loginForm.rememberPwd">记住账号</el-checkbox>
+				<el-checkbox v-model="formData.rememberPwd">记住账号</el-checkbox>
 				<div class="register">
 					<router-link to="/account/forget">忘记密码?</router-link>
 					<span>没有账号?</span>
@@ -58,12 +57,12 @@ import { encryptByDES } from '@/utils/crypto'
 export default {
 	data() {
 		return {
-			loginForm: {
+			formData: {
 				username: 'admin',
 				password: '123456',
 				rememberPwd: false,
 			},
-			loginRules: {
+			formRules: {
 				username: [
 					{
 						required: true,
@@ -93,13 +92,14 @@ export default {
 			this.passwordType = this.passwordType == 'password' ? 'text' : 'password'
 		},
 		handleLogin() {
-			this.loginLoading = true
-			this.$refs.loginForm.validate(async valid => {
+			this.$refs.formRef.validate(async valid => {
 				if (valid) {
+					const eccryptKey = '123456781111'
 					const account = {
-						username: this.loginForm.username,
-						password: encryptByDES(this.loginForm.password, '123456781111'),
+						username: this.formData.username,
+						password: encryptByDES(this.formData.password, eccryptKey),
 					}
+					this.loginLoading = true
 					try {
 						await this.$store.dispatch('login', account)
 						this.$router.replace('/').catch(() => {})
@@ -109,9 +109,6 @@ export default {
 					} finally {
 						this.loginLoading = false
 					}
-				} else {
-					this.$message.error('登录失败,请填写正确的信息！')
-					this.loginLoading = false
 				}
 			})
 		},

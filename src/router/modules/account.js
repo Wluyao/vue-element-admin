@@ -4,6 +4,7 @@ const Register = () => import(/* webpackChunkName:'register' */ '@/pages/account
 const Forget = () => import(/* webpackChunkName:'forget' */ '@/pages/account/forget')
 
 const route = {
+	name: 'Account',
 	path: '/account',
 	component: OuterLayout,
 	meta: {
