@@ -2,6 +2,7 @@ const InnerLayout = () => import(/* webpackChunkName:'innerLayout' */ '@/layouts
 const Permission = () => import(/* webpackChunkName:'permission' */ '@/pages/permission')
 
 const route = {
+	name: 'Permission',
 	path: '/permission',
 	component: InnerLayout,
 	redirect: '/permission/index',
@@ -11,7 +12,6 @@ const route = {
 	},
 	children: [
 		{
-			name: 'Permission',
 			path: '/permission/index',
 			component: Permission,
 			meta: {

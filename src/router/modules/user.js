@@ -2,6 +2,7 @@ const InnerLayout = () => import(/* webpackChunkName:'innerLayout' */ '@/layouts
 const User = () => import(/* webpackChunkName:'user' */ '@/pages/user')
 
 const route = {
+	name: 'User',
 	path: '/user',
 	component: InnerLayout,
 	redirect: '/user/index',
@@ -11,7 +12,6 @@ const route = {
 	},
 	children: [
 		{
-			name: 'User',
 			path: '/user/index',
 			component: User,
 			meta: {

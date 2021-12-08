@@ -2,6 +2,7 @@ const InnerLayout = () => import(/* webpackChunkName:'innerLayout' */ '@/layouts
 const Reload = () => import(/* webpackChunkName:'reload' */ '@/pages/reload')
 
 const route = {
+	name: 'Reload',
 	path: '/reload',
 	component: InnerLayout,
 	redirect: '/reload/index',

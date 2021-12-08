@@ -2,6 +2,7 @@ const InnerLayout = () => import(/* webpackChunkName:'innerLayout' */ '@/layouts
 const Tab = () => import(/* webpackChunkName:'tab' */ '@/pages/tab')
 
 const route = {
+	name: 'Tab',
 	path: '/tab',
 	component: InnerLayout,
 	redirect: '/tab/index',
@@ -9,9 +10,8 @@ const route = {
 		title: 'Tab选项卡',
 		icon: 'tab',
 	},
-	children: [ 
+	children: [
 		{
-			name: 'Tab',
 			path: '/tab/index',
 			component: Tab,
 			meta: {

@@ -27,6 +27,7 @@ const staticRouteMap = [
 		},
 	},
 	accountRoute,
+	reloadRoute,
 ]
 
 const dynamicRouteMap = [
@@ -42,6 +43,7 @@ const dynamicRouteMap = [
 	userRoute,
 	articleRoute,
 	moreRoute,
+	// 必须写在最后。前边的路由都未匹配的时候，才匹配到404
 	{
 		name: '404',
 		path: '*',
