@@ -1,11 +1,12 @@
 import Vue from 'vue'
 
-import formatDate from './formatDate'
+const filterContext = require.context('./modules', false, /\.js$/)
 
-const filters = {
-	formatDate,
-}
-
-Object.keys(filters).forEach(key => {
-	Vue.filter(key, filters[key])
+filterContext.keys().forEach(path => {
+	const filterName = path
+		.split('/')
+		.pop()
+		.replace(/\.\w+$/, '')
+	const filterConfig = filterContext(path)
+	Vue.filter(filterName, filterConfig.default)
 })

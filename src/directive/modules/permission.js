@@ -1,5 +1,5 @@
 // DOM级权限控制，若当前的角色不在指令传入的权限数组中，则该DOM元素不渲染。
-
+// TODO  应该采用权限码的方式
 import store from '@/store'
 
 export default {
