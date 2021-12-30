@@ -7,5 +7,5 @@ import './modules/tab'
 
 //延时数据返回
 Mock.setup({
-	timeout: '300-800',
+	timeout: '100-500',
 })

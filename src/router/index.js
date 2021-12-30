@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 import store from '@/store'
 import _ from 'lodash'
 import accountRoute from './modules/account'
@@ -16,7 +16,7 @@ import reloadRoute from './modules/reload'
 import tabRoute from './modules/tab'
 import userRoute from './modules/user'
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
 const staticRouteMap = [
 	{
@@ -55,7 +55,7 @@ const dynamicRouteMap = [
 ]
 
 const createRouter = () =>
-	new VueRouter({
+	new Router({
 		// mode: 'history',
 		routes: staticRouteMap,
 		scrollBehavior(to, from, savedPosition) {

@@ -86,6 +86,7 @@ export default {
 <style lang="scss">
 .pagination {
 	padding: 10px;
+	height: 50px;
 
 	&--left {
 		float: left;

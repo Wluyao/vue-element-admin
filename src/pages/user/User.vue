@@ -43,10 +43,10 @@
 
 		<div class="user-manager__table">
 			<el-table
+				v-loading="tableLoading"
 				:data="userList"
 				border
 				highlight-current-row
-				v-loading="tableLoading"
 				@selection-change="handleSelectedRows"
 			>
 				<el-table-column type="selection" width="50px"></el-table-column>

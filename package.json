@@ -20,6 +20,7 @@
     "dayjs": "^1.8.17",
     "element-ui": "^2.13.0",
     "html2canvas": "^1.0.0-rc.3",
+    "lodash": "^4.17.21",
     "mockjs": "^1.1.0",
     "resize-observer-polyfill": "^1.5.1",
     "vue": "^2.6.11",
