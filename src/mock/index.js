@@ -1,9 +1,7 @@
 import Mock from 'mockjs'
-import './modules/account'
-import './modules/dashboard'
-import './modules/article'
-import './modules/user'
-import './modules/tab'
+
+const context = require.context('./modules', false, /\.js$/)
+context.keys().map(context)
 
 //延时数据返回
 Mock.setup({

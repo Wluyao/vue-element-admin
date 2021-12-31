@@ -1,12 +1,12 @@
 import Vue from 'vue'
 
-const filterContext = require.context('./modules', false, /\.js$/)
+const context = require.context('./modules', false, /\.js$/)
 
-filterContext.keys().forEach(path => {
+context.keys().forEach(path => {
 	const filterName = path
 		.split('/')
 		.pop()
 		.replace(/\.\w+$/, '')
-	const filterConfig = filterContext(path)
+	const filterConfig = context(path)
 	Vue.filter(filterName, filterConfig.default)
 })

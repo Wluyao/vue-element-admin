@@ -2,9 +2,9 @@
 import Vue from 'vue'
 import _ from 'lodash'
 
-const componentContext = require.context('./base', true, /\.vue$/)
+const context = require.context('./base', true, /\.vue$/)
 
-componentContext.keys().forEach(path => {
+context.keys().forEach(path => {
 	// 获取组件的PascalCase命名
 	const componentName = _.upperFirst(
 		_.camelCase(
@@ -14,6 +14,6 @@ componentContext.keys().forEach(path => {
 				.replace(/\.\w+$/, '')
 		)
 	)
-	const componentConfig = componentContext(path)
+	const componentConfig = context(path)
 	Vue.component(componentName, componentConfig.default)
 })
