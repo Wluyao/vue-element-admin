@@ -1,8 +1,9 @@
 import api from '@/api'
+import { sessionMng } from '@/utils/storage-mng'
 
 export default {
 	state: {
-		token: sessionStorage.getItem('token'),
+		token: sessionMng.getItem('token'),
 		userInfo: {},
 		routeMap: [],
 	},
@@ -27,7 +28,7 @@ export default {
 				password,
 			})
 			const token = res.token
-			sessionStorage.setItem('token', token)
+			sessionMng.setItem('token', token)
 			commit('SET_TOKEN', token)
 		},
 		// 实际开发token放在请求头的Authorization中
@@ -45,7 +46,7 @@ export default {
 			commit('SET_TOKEN', '')
 			commit('SET_USER_INFO', {})
 			commit('SET_ROUTE_MAP', [])
-			sessionStorage.clear()
+			sessionMng.clear()
 		},
 	},
 }

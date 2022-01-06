@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import domain from '@/config/domain'
+import { sessionMng } from '@/utils/storage-mng'
 
 class Request {
 	baseConfig = {
@@ -12,7 +13,7 @@ class Request {
 	instance = null
 
 	constructor() {
-		const token = sessionStorage.getItem('token')
+		const token = sessionMng.getItem('token')
 		if (token) {
 			this.setHeader({
 				Authorization: token,

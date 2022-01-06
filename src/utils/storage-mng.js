@@ -1,5 +1,10 @@
+/**
+ * 本地存储的读取往往分散在各个不同的地方，会显得很乱。
+ * 使用本地存储的时候推荐统一采用这个封装好的工具，同时在这里记录每个key和它的作用。
+ */
+
 // 项目中所有存储在localStorage中的数据
-const localKeyName = [
+const localKeys = [
 	// 主题色
 	'theme',
 	//  是否折叠侧边菜单
@@ -13,7 +18,7 @@ const localKeyName = [
 ]
 
 // 项目中所有存储在sessionStorage中的数据
-const sessionKeyName = []
+const sessionKeys = ['token']
 
 class StorageMng {
 	// key名称前缀
@@ -26,25 +31,25 @@ class StorageMng {
 		this.mode = mode
 	}
 
-	setItem(keyName, value) {
+	setItem(key, value) {
 		try {
-			this.mode.setItem(`${this.prefix}${keyName}`, window.JSON.stringify(value))
+			this.mode.setItem(`${this.prefix}${key}`, window.JSON.stringify(value))
 		} catch (err) {
-			console.warn(`Storage ${keyName} set error`, err)
+			console.warn(`Storage ${key} set error`, err)
 		}
 	}
 
-	getItem(keyName) {
-		const result = this.mode.getItem(`${this.prefix}${keyName}`)
+	getItem(key) {
+		const result = this.mode.getItem(`${this.prefix}${key}`)
 		try {
 			return result ? window.JSON.parse(result) : result
 		} catch (err) {
-			console.warn(`Storage ${keyName} get error`, err)
+			console.warn(`Storage ${key} get error`, err)
 		}
 	}
 
-	removeItem(keyName) {
-		this.mode.removeItem(`${this.prefix}${keyName}`)
+	removeItem(key) {
+		this.mode.removeItem(`${this.prefix}${key}`)
 	}
 
 	clear() {
@@ -59,9 +64,9 @@ class StorageMng {
 	getKeys() {
 		const keys = []
 		Array.from({ length: this.mode.length }).forEach((item, index) => {
-			const keyName = this.mode.key(index)
-			if (keyName.startsWith(this.prefix)) {
-				keys.push(keyName.slice(this.prefix.length))
+			const key = this.mode.key(index)
+			if (key.startsWith(this.prefix)) {
+				keys.push(key.slice(this.prefix.length))
 			}
 		})
 		return keys
@@ -69,7 +74,7 @@ class StorageMng {
 
 	// 获取所有数据
 	getAll() {
-		return Object.fromEntries(this.getKeys().map(keyName => [keyName, this.getItem(keyName)]))
+		return Object.fromEntries(this.getKeys().map(key => [key, this.getItem(key)]))
 	}
 }
 

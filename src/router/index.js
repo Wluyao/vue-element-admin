@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
 import _ from 'lodash'
+import { sessionMng } from '@/utils/storage-mng'
 import accountRoute from './modules/account'
 import articleRoute from './modules/article'
 import blankRoute from './modules/blank'
@@ -76,7 +77,7 @@ const resetRouter = () => {
 
 const router = createRouter()
 
-//根据路由名称获取可访问的路由表
+// 根据路由名称获取可访问的路由表
 const filterRouteMap = (routeNames, routeMap) => {
 	const acceptedRouteMap = []
 	const routes = _.cloneDeep(routeMap)
@@ -98,10 +99,21 @@ const filterRouteMap = (routeNames, routeMap) => {
 	return acceptedRouteMap
 }
 
+// 获取外部路由的路径
+const getOuterPaths = (routes, paths) => {
+	routes.forEach(route => {
+		paths.push(route.path)
+		if (route.children) {
+			getOuterPaths(route.children, paths)
+		}
+	})
+}
+
 // 导航守卫
 router.beforeEach(async (to, from, next) => {
-	const token = sessionStorage.getItem('token')
-	const outerPaths = ['/account/login', '/account/register', '/account/forget']
+	const token = sessionMng.getItem('token')
+	const outerPaths = []
+	getOuterPaths([accountRoute], outerPaths)
 	// token不存在(说明没登录),但是路由将要进入系统内部，自动跳到登录页面。
 	if (!token && !outerPaths.includes(to.path)) {
 		next('/account/login')
@@ -121,6 +133,11 @@ router.beforeEach(async (to, from, next) => {
 		}
 	}
 })
+
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+	return originalPush.call(this, location).catch(err => err)
+}
 
 export { resetRouter }
 

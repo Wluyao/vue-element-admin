@@ -1,5 +1,8 @@
 <template>
-	<div class="parent"></div>
+	<div class="parent">
+		<base-icon name="home"></base-icon>
+		<span>dfgfg</span>
+	</div>
 </template>
 
 <script>

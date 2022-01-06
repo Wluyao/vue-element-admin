@@ -1,5 +1,5 @@
 <template>
-	<svg class="base-icon" :class="iconClass" :style="iconStyle" aria-hidden="true">
+	<svg class="base-icon" :class="iconClass" :style="iconStyle" aria-hidden="true" @click="handleClick">
 		<use :xlink:href="iconName" :stroke-width="strokeWidth"></use>
 	</svg>
 </template>
@@ -53,6 +53,11 @@ export default {
 			}
 		},
 	},
+	methods: {
+		handleClick() {
+			this.$emit('click')
+		},
+	},
 }
 </script>
 
@@ -61,7 +66,8 @@ export default {
 	width: 1em;
 	height: 1em;
 	vertical-align: -0.15em;
-	fill: currentColor;
 	overflow: hidden;
+	fill: currentColor;
+	stroke: currentColor;
 }
 </style>
