@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import Scrollbar from '@/components/base/scrollbar'
 import Logo from './Logo'
 import MenuItem from './MenuItem'
@@ -47,52 +48,34 @@ export default {
 	},
 	created() {
 		const menuRouteMap = this.getMenuRouteMap(this.routeMap)
-		this.menuList = this.getMenu(menuRouteMap)
+		this.menuList = menuRouteMap.map(route => this.getMenuItem(route))
 	},
 	methods: {
 		// 获取需要在侧边菜单显示的路由表
 		getMenuRouteMap(routes) {
-			const menuRouteMap = routes.filter(route => {
-				// 如果父路由设置了hiddenInMenu：true，则它以及它的子路由都不能通过菜单栏访问
+			return _.cloneDeep(routes).filter(route => {
 				if (route.meta.hiddenInMenu) {
 					return false
 				} else {
 					if (route.children) {
-						route.children = this.getMenuRouteMap(route.children)
-						if (route.children.length === 0) {
-							// 如果所有子路由都设置了hiddenInMenu：true，则父路由不显示
-							return false
-						} else {
-							return true
-						}
-					} else {
-						// 路由未设置hiddenInMenu：true，但是又不存在子路由的情况
-						return true
+						const children = this.getMenuRouteMap(route.children)
+						route.children = children.length > 0 ? children : undefined
 					}
+					return true
 				}
 			})
-			return menuRouteMap
 		},
 		getMenuItem(route) {
 			// children不存在代表是最后一级路由，只有一个children代表只有第一级路由
-			if (!route.children || route.children.length === 1) {
-				return {
-					title: route.meta.title,
-					icon: route.meta.icon,
-					path: route.path,
-				}
-			} else {
-				return {
-					title: route.meta.title,
-					icon: route.meta.icon,
-					path: route.path,
-					children: route.children.map(childrenRoute => this.getMenuItem(childrenRoute)),
-				}
+			return {
+				title: route.meta.title,
+				icon: route.meta.icon,
+				path: route.path,
+				children:
+					!route.children || route.children.length === 1
+						? undefined
+						: route.children.map(childrenRoute => this.getMenuItem(childrenRoute)),
 			}
-		},
-		// 根据路由表生成导航菜单
-		getMenu(routes) {
-			return routes.map(route => this.getMenuItem(route))
 		},
 	},
 }

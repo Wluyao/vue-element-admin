@@ -113,16 +113,12 @@ export default {
 		line-height: 20px;
 		color: $black9;
 	}
-}
-</style>
 
-<style lang="scss">
-.drag-upload {
-	.el-upload {
+	/deep/.el-upload {
 		width: 100%;
 	}
 
-	.el-upload-dragger {
+	/deep/.el-upload-dragger {
 		width: 100%;
 		min-height: 140px;
 		height: 100%;

@@ -8,6 +8,7 @@
 		:show-file-list="false"
 		:before-upload="beforeUpload"
 		:on-success="handleSuccess"
+		:on-error="handleError"
 	>
 		<i
 			class="avatar-upload__icon"
@@ -22,7 +23,7 @@
 <script>
 /**
  * 上传头像
-*/
+ */
 export default {
 	props: {
 		// 图片地址
@@ -96,6 +97,10 @@ export default {
 				this.$message.error(res.message || '上传失败')
 			}
 		},
+		handleError() {
+			this.loading = false
+			this.$message.error('上传失败')
+		},
 	},
 }
 </script>
@@ -122,12 +127,8 @@ export default {
 		color: #8c939d;
 		text-align: center;
 	}
-}
-</style>
 
-<style lang="scss">
-.avatar-upload {
-	.el-upload {
+	/deep/.el-upload {
 		width: 100%;
 		height: 100%;
 	}

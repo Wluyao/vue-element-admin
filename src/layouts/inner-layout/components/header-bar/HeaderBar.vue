@@ -6,8 +6,15 @@
 			@click="handleCollapse"
 		/>
 
+		<!-- <el-breadcrumb separator="/">
+			<el-breadcrumb-item v-for="(item, index) in matchList" :key="item.path">
+				<span class="breadcrumb-link" v-if="index < matchList.length - 1">{{ item.meta.title }}</span>
+				<span v-else class="black3">{{ item.meta.title }}</span>
+			</el-breadcrumb-item>
+		</el-breadcrumb> -->
+
 		<el-tooltip effect="dark" :content="isFullScreen ? '取消全屏' : '全屏浏览'" placement="bottom">
-			<i class="el-icon-rank" @click="handleTriggerFullScreen"></i>
+			<i class="el-icon-rank" @click="handleToggleFullScreen"></i>
 		</el-tooltip>
 
 		<el-dropdown @command="handleCommand">
@@ -48,7 +55,7 @@ export default {
 			this.$store.commit('SET_SIDE_COLLAPSE', !this.sideCollapse)
 		},
 		// 全屏浏览
-		handleTriggerFullScreen() {
+		handleToggleFullScreen() {
 			if (this.isFullScreen) {
 				const doc = document
 				const exitFullScreen =
