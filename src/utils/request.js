@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import domain from '@/config/domain'
+import store from '@/store'
 import { sessionMng } from '@/utils/storage-mng'
 
 class Request {
@@ -57,15 +58,24 @@ class Request {
 		this.instance.interceptors.response.use(
 			res => {
 				const { code, data, msg } = res.data
-				if (code === 200) {
-					return data
-				} else {
-					Message({
-						type: 'error',
-						message: msg || '获取数据失败',
-						showClose: true,
-					})
-					return Promise.reject(res)
+				switch (code) {
+					case 200:
+						return Promise.resolve(data)
+					case 401:
+						Message({
+							type: 'warning',
+							message: msg || '没有权限',
+							showClose: true,
+						})
+						store.dispatch('logout', false)
+						return Promise.reject(res)
+					default:
+						Message({
+							type: 'error',
+							message: msg || '接口请求失败',
+							showClose: true,
+						})
+						return Promise.reject(res)
 				}
 			},
 			err => {

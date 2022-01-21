@@ -85,8 +85,6 @@ export default {
 		async handleCommand(command) {
 			if (command === 'logout') {
 				await this.$store.dispatch('logout')
-				resetRouter()
-				this.$router.replace('/account/login')
 			}
 		},
 		// 打开设置

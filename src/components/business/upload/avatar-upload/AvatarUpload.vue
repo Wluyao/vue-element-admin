@@ -26,7 +26,7 @@
  */
 export default {
 	props: {
-		// 图片地址
+		// 图片URL地址
 		value: {
 			type: String,
 			default: '',

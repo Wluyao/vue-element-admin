@@ -94,18 +94,16 @@ export default {
 		handleLogin() {
 			this.$refs.formRef.validate(async valid => {
 				if (valid) {
-					const eccryptKey = '123456781111'
-					const account = {
-						username: this.formData.username,
-						password: encryptByDES(this.formData.password, eccryptKey),
-					}
-					this.loginLoading = true
 					try {
+						this.loginLoading = true
+						const eccryptKey = '123456781111'
+						const account = {
+							username: this.formData.username,
+							password: encryptByDES(this.formData.password, eccryptKey),
+						}
 						await this.$store.dispatch('login', account)
-						this.$router.replace('/').catch(() => {})
 					} catch (err) {
 						console.error(err)
-						this.$message.error('登录失败,请填写正确的信息！')
 					} finally {
 						this.loginLoading = false
 					}

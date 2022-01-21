@@ -28,7 +28,6 @@ const staticRouteMap = [
 		},
 	},
 	accountRoute,
-	reloadRoute,
 ]
 
 const dynamicRouteMap = [
@@ -112,8 +111,8 @@ router.beforeEach(async (to, from, next) => {
 	if (!token && !outerPaths.includes(to.path)) {
 		next('/account/login')
 	} else {
-		// 如果token存在(说明已登录)，但是角色不存在(说明没获取到用户信息)，这时应该获取用户信息
-		if (token && !store.getters.userInfo.roles) {
+		// 如果token存在(说明已登录)，但是用户信息不存在，这时应该获取用户信息
+		if (token && !store.getters.userInfo.id) {
 			const res = await store.dispatch('getUserInfo')
 			const acceptedRouteMap = filterRouteMap(res.routeNames, dynamicRouteMap)
 			// 动态注册路由

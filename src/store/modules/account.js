@@ -1,10 +1,21 @@
 import api from '@/api'
+import router, { resetRouter } from '@/router'
+import request from '@/utils/request'
 import { sessionMng } from '@/utils/storage-mng'
 
 export default {
 	state: {
 		token: sessionMng.getItem('token'),
-		userInfo: {},
+		userInfo: {
+			id: '',
+			name: '',
+			gender: '',
+			avatar: '',
+			email: '',
+			mobilePhone: '',
+			roles: [],
+			routeNames: [],
+		},
 		routeMap: [],
 	},
 	mutations: {
@@ -28,8 +39,12 @@ export default {
 				password,
 			})
 			const token = res.token
-			sessionMng.setItem('token', token)
 			commit('SET_TOKEN', token)
+			sessionMng.setItem('token', token)
+			request.setHeader({
+				Authorization: token,
+			})
+			router.push('/dashboard')
 		},
 		// 实际开发token放在请求头的Authorization中
 		async getUserInfo({ commit, state }) {
@@ -39,14 +54,20 @@ export default {
 			commit('SET_USER_INFO', res)
 			return res
 		},
-		async logout({ commit, state }) {
-			await api.account.logout({
-				token: state.token,
-			})
-			commit('SET_TOKEN', '')
-			commit('SET_USER_INFO', {})
-			commit('SET_ROUTE_MAP', [])
-			sessionMng.clear()
-		},
+		// 退出
+		async logout({ commit }, isRequest = true) {
+      if (isRequest) {
+        await api.account.logout()
+      }
+      commit('SET_TOKEN', '')
+      commit('SET_USER_INFO', {})
+      commit('SET_ROUTE_MAP', [])
+      sessionMng.clear()
+      request.setHeader({
+        Authorization: '',
+      })
+      resetRouter()
+      router.replace('/account/login')
+    },
 	},
 }
