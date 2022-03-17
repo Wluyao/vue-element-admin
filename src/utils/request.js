@@ -57,7 +57,7 @@ class Request {
 	setResnterceptors = () => {
 		this.instance.interceptors.response.use(
 			res => {
-				const { code, data, msg } = res.data
+				const { code = 200, data = res.data, msg } = res.data
 				switch (code) {
 					case 200:
 						return Promise.resolve(data)

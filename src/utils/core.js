@@ -13,7 +13,6 @@ export function random(min, max) {
 	const choice = max - min + 1
 	return Math.floor(min + Math.random() * choice)
 }
-var num = random(2, 10)
 
 /**
  * 滚动,先慢后快，缓动的效果比easeIn动画明显
@@ -177,4 +176,20 @@ export function loadScript(src, callback = (err, res) => {}) {
 			callback(new Error(`“${src}”加载失败`), script)
 		}
 	}
+}
+
+/**
+ * 获取树的所有节点的某个属性值
+ */
+export const getTreeNodeValue = (tree, filed) => {
+	return tree
+		.map(node => {
+			const result = []
+			node[filed] && result.push(node[filed])
+			if (node.children) {
+				result.push(...getTreeNodeValue(node.children, filed))
+			}
+			return result
+		})
+		.flat()
 }

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
 import _ from 'lodash'
+import { getTreeNodeValue } from '@/utils/core'
 import { sessionMng } from '@/utils/storage-mng'
 import accountRoute from './modules/account'
 import articleRoute from './modules/article'
@@ -59,7 +60,6 @@ const createRouter = () =>
 		// mode: 'history',
 		routes: staticRouteMap,
 		scrollBehavior(to, from, savedPosition) {
-			// 本项目布局使用的是.inner-layout__page滚动，scrollBehavior返回的位置是指window的滚动，所有滚动不会生效。
 			const innerPage = document.querySelector('.inner-layout__page')
 			if (innerPage) {
 				innerPage.scrollTo(0, 0)
@@ -92,21 +92,11 @@ const filterRouteMap = (routeNames, routeMap) => {
 	return acceptedRouteMap
 }
 
-// 获取外部路由的路径
-const getOuterPaths = (routes, paths) => {
-	routes.forEach(route => {
-		paths.push(route.path)
-		if (route.children) {
-			getOuterPaths(route.children, paths)
-		}
-	})
-}
 
 // 导航守卫
 router.beforeEach(async (to, from, next) => {
 	const token = sessionMng.getItem('token')
-	const outerPaths = []
-	getOuterPaths([accountRoute], outerPaths)
+	const outerPaths = getTreeNodeValue([accountRoute], 'path')
 	// token不存在(说明没登录),但是路由将要进入系统内部，自动跳到登录页面。
 	if (!token && !outerPaths.includes(to.path)) {
 		next('/account/login')
