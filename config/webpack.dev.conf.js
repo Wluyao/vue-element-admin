@@ -2,7 +2,6 @@ const path = require('path')
 const { merge } = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf.js')
 const webpack = require('webpack')
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 
 const resolve = dir => {
 	return path.resolve(process.cwd(), dir)
@@ -10,24 +9,7 @@ const resolve = dir => {
 
 module.exports = merge(baseWebpackConfig, {
 	mode: 'development',
-	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
-		new HardSourceWebpackPlugin({
-			cacheDirectory: '../node_modules/.cache/hard-source/[confighash]',
-			configHash: function (webpackConfig) {
-				return require('node-object-hash')({ sort: false }).hash(webpackConfig)
-			},
-			environmentHash: {
-				root: process.cwd(),
-				directories: [],
-				files: ['package-lock.json', 'yarn.lock'],
-			},
-			cachePrune: {
-				maxAge: 7 * 24 * 60 * 60 * 1000,
-				sizeThreshold: 150 * 1024 * 1024,
-			},
-		}),
-	],
+	plugins: [new webpack.HotModuleReplacementPlugin()],
 	devServer: {
 		contentBase: resolve('dist'),
 		compress: true,
