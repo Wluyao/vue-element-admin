@@ -1,22 +1,13 @@
-<template>
-	<div>
-		<router-view></router-view>
+<script lang="ts" setup></script>
 
-		<div style="display: none">
-			<style-setting></style-setting>
-			<theme-setting></theme-setting>
-		</div>
+<template>
+	<div id="app">
+		<router-view></router-view>
 	</div>
 </template>
 
-<script>
-import StyleSetting from '@/components/business/setting/style-setting'
-import ThemeSetting from '@/components/business/setting/theme-setting'
-
-export default {
-	components: {
-		StyleSetting,
-		ThemeSetting,
-	},
+<style lang="less" scoped>
+#app {
+	height: 100vh;
 }
-</script>
+</style>

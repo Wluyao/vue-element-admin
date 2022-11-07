@@ -1,23 +1,10 @@
 ## 项目简介
 
-    基于Vue+Element的通用后台管理系统。提供了一些典型的中后台业务功能。
+    后台管理系统。
 
 ## 技术依赖
 
-- 主体：Vue、ElementUI、webpack
-- 图表：Antv/G2
-- Excel：js-xlsx
-- pdf：pdf.js
-- 图片生成：html2canvas
-- 富文本编辑器：Tinymce
-- 数据：axios、Mock
-- 地图：高德
-- 
-## 项目地址
-
-- [github](https://github.com/Wluyao/vue-element-manage)
-- [gitee](https://github.com/Wluyao/vue-element-manage)
-- [预览](https://wluyao.gitee.io/vue-element-manage)
+主体：Vue、ElementPlus、TypeScript、Vite
 
 ## 功能
 
@@ -67,55 +54,47 @@
 ## 目录结构
 
 ```
-|-- config              webpack配置文件
-|-- dist                webpack构建目录
-|-- docs                文档
+
 |-- public              html模板
-|-- src                 源码目录
-|	|-- api                   接口
-|	|-- assets                静态资源文件，会被webpack解析为模块依赖
-|		|-- img                     图片
-|		|-- fonts                   字体
-|	|-- components            全局公共组件
-|	|-- directive             全局公共指令
-|	|-- filters               过滤器
+|-- src                 源码
+|	|-- @types                全局类型定义
+|	|-- apis                  接口
+|	|-- assets                静态资源文件
+|		|-- images                图片
+|		|-- icons                 图标
+|		|-- styles                样式
+|	|-- components            组件
+|		|-- base                  基础组件
+|		|-- business              业务组件
+|	|-- directive             通用指令
 |	|-- layouts               基础布局
+|		|-- platform              平台布局
+|		|-- portal                门户布局
 |	|-- mock                  数据模拟
-|	|-- pages                 页面级组件
+|	|-- views                 页面
 |	|-- router                路由管理
 |	|-- store                 状态管理
 |	|-- utils                 全局公用方法
 |	|-- App.vue               根组件
-|	|-- main.js               入口文件，加载各种组件
-|-- static              第三方纯静态资源，不会被webpack处理
-|-- .babelrc            babel-loader 配置
-|-- .editorconfig       IDE配置
-|-- .gitignore          git提交时忽略的文件
-|--	package.json        项目基本信息
-|-- README.md           项目说明
+|	|-- main.ts               入口文件
 ```
-
-## 项目截图
-
-![](https://s2.ax1x.com/2020/01/02/lt7zse.png)
-
-![](https://s2.ax1x.com/2020/01/02/lt7FvF.png)
-
-![](https://s2.ax1x.com/2020/01/02/ltHMon.png)
 
 ## 使用
 
 #### 安装依赖
+
 ```
 yarn
 ```
 
 #### 运行
+
 ```
 yarn serve
 ```
 
 #### 构建
+
 ```
 yarn build
 ```

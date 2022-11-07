@@ -19,12 +19,12 @@ class ExcelHandler {
 		let sheet
 		// 自动设置表格宽度所需要的数据格式与不设置宽度不一样。
 		if (autoWidth) {
-			const data = dataSource.map(item => Object.values(item))
+			const data = dataSource.map((item) => Object.values(item))
 			data.unshift(header)
 			sheet = this.sheet_from_array_of_arrays(data)
 			this.adaptWidth(data, sheet)
 		} else {
-			const data = dataSource.map(i => {
+			const data = dataSource.map((i) => {
 				const values = Object.values(i)
 				const newItem = {}
 				header.forEach((item, index) => {
@@ -112,8 +112,8 @@ class ExcelHandler {
 	// 调整excel表格宽度
 	adaptWidth(data, sheet) {
 		// 设置worksheet每列的最大宽度
-		const colWidth = data.map(row =>
-			row.map(val => {
+		const colWidth = data.map((row) =>
+			row.map((val) => {
 				// 先判断是否为null/undefined
 				if (val == null) {
 					return {
@@ -183,7 +183,7 @@ class ExcelHandler {
 	readExcelData(file, callback) {
 		const fileReader = new FileReader()
 		let result = {}
-		fileReader.onload = event => {
+		fileReader.onload = (event) => {
 			const dataSource = event.target.result
 			// 以二进制流方式读取得到整份excel表格对象
 			const workbook = XLSX.read(dataSource, {
