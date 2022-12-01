@@ -34,6 +34,8 @@ class Request {
 	private setReqInterceptors = () => {
 		this.instance.interceptors.request.use(
 			(config) => {
+				// 避免复制接口url的时候多复制了空格
+				config.url = config.url?.trim()
 				return config
 			},
 			(err) => {

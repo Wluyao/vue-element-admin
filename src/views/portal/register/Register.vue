@@ -4,7 +4,9 @@ import { FormInstance, FormRules } from 'element-plus'
 import { regPassword, regMobile } from '@/config/regexp'
 import { useAppStore } from '@/store'
 import { encryptByDES } from '@/utils/crypto'
+import { DesKey } from '@/config/const'
 import { useSmsCaptcha } from '@/hooks/business'
+import apis from '@/apis'
 
 const formRef = ref<FormInstance>()
 const submitLoading = ref(false)
@@ -84,13 +86,12 @@ const handleSubmit = () => {
 	formRef.value?.validate(async (valid) => {
 		if (!valid) return
 		submitLoading.value = true
-		await window.$apis.portal.register(formData.value)
+		await apis.portal.register(formData.value)
 		window.$message.success('注册成功！')
 		submitLoading.value = false
-		const eccryptKey = '123456'
 		appStore.login({
 			username: formData.value.username,
-			password: encryptByDES(formData.value.password, eccryptKey),
+			password: encryptByDES(formData.value.password, DesKey),
 		})
 	})
 }

@@ -95,8 +95,7 @@ export const inputNumber = (
 	min: number = Number.NEGATIVE_INFINITY,
 	max: number = Number.POSITIVE_INFINITY
 ): string => {
-	if (source === 0) return '0'
-	if (!source) return ''
+	if (source == null) return ''
 	let value = source.toString()
 	value = value.replace(/^(\-)*\D*(\d*(?:\.\d*)?).*$/g, '$1$2')
 	//  只能输入正数
@@ -125,11 +124,6 @@ export const inputNumber = (
 	}
 	return value
 }
-
-/**
- * 随机生成十六进制颜色
- */
-export const randomHexColor = () => '#' + ('00000' + ((Math.random() * 0x1000000) << 0).toString(16)).substr(-6)
 
 /**
  * 获取树的所有节点的某个属性值

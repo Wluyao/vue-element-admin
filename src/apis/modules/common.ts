@@ -4,11 +4,14 @@ import request from '@/utils/request'
 export const getUserInfo = () => request.post('/system/userInfo')
 
 // 获取验证码
-export const sendEmailCaptcha = (data: any) => request.post('/system/captcha/sms', data)
-export const sendSmsCaptcha = (data: any) => request.post('/system/captcha/email', data)
+export const sendEmailCaptcha = (payload: any) => request.post('/system/captcha/sms', payload)
+export const sendSmsCaptcha = (payload: any) => request.post('/system/captcha/email', payload)
 
 // 校验验证码
-export const validateCaptcha = (data: any) => request.post('/system/captcha/validate', data)
+export const validateCaptcha = (payload: any) => request.post('/system/captcha/validate', payload)
 
 // 退出登录
 export const logout = () => request.post('/system/logout')
+
+// 上传图片
+export const uploadImage = (payload) => request.post('/system/image/upload', payload)

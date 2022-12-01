@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<IProps>(), {
 	pageSizes: () => [10, 20, 30, 50, 100],
 	layout: 'total, sizes, prev, pager, next, jumper',
 	background: true,
-	position: 'center',
+	position: 'right',
 })
 
 const emit = defineEmits(['update:pageNumber', 'update:pageSize', 'pagination'])

@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
 // 登录
-export const login = (data) => request.post('/system/login', data)
+export const login = (payload) => request.post('/system/login', payload)
 
 // 注册
-export const register = (data) => request.post('/system/register', data)
+export const register = (payload) => request.post('/system/register', payload)
 
-// 修改密码
-export const modifyPassword = (data: any) => request.post('/system/password/modify', data)
+// 重置密码
+export const resetPassword = (payload: any) => request.post('/system/password/reset', payload)

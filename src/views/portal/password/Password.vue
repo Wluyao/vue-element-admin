@@ -3,7 +3,10 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { FormInstance, FormRules } from 'element-plus'
 import { regPassword, regMobile } from '@/config/regexp'
-import { useSmsCaptcha } from '@/hooks/business'
+import { useSmsCaptcha } from '@/hooks'
+import { encryptByDES } from '@/utils/crypto'
+import { DesKey } from '@/config/const'
+import apis from '@/apis'
 
 const formRef = ref<FormInstance>()
 const formData = ref({
@@ -78,7 +81,11 @@ const handleSubmit = () => {
 	formRef.value?.validate(async (valid) => {
 		if (!valid) return
 		submitLoading.value = true
-		await window.$apis.portal.modifyPassword(formData.value)
+		await apis.portal.resetPassword({
+			mobile: formData.value.mobile,
+			captcha: formData.value.captcha,
+			password: encryptByDES(formData.value.password, DesKey),
+		})
 		window.$message.success('修改成功,请使用新密码进行登录')
 		router.replace('/login')
 	})

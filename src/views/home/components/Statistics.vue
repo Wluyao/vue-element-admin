@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 import { IStatistics } from '@/model/home'
+import apis from '@/apis'
 
 const statistics = ref<Partial<IStatistics>>({})
 
@@ -9,7 +10,7 @@ onMounted(() => {
 })
 
 const getStatistics = async () => {
-	const data = await window.$apis.home.getStatistics()
+	const data = await apis.home.getStatistics()
 	statistics.value = data
 }
 </script>

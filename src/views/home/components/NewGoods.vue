@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 import { IGoods } from '@/model/home'
+import apis from '@/apis'
 
 const goodsList = ref<IGoods[]>([])
 
@@ -9,7 +10,7 @@ onMounted(() => {
 })
 
 const getGoodsList = async () => {
-	const data = await window.$apis.home.getGoodsList()
+	const data = await apis.home.getGoodsList()
 	goodsList.value = data
 }
 </script>

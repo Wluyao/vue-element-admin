@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 import { ITask } from '@/model/home'
+import apis from '@/apis'
 
 const formRef = ref()
 const editVisible = ref(false)
@@ -24,21 +25,21 @@ onMounted(() => {
 
 const getTaskList = async () => {
 	tableLoading.value = true
-	const data = await window.$apis.home.getTaskList()
+	const data = await apis.home.getTaskList()
 	tableLoading.value = false
 	taskList.value = data
 }
 
 // 删除任务
 const handleDelete = async (row: ITask) => {
-	await window.$apis.home.deleteTask(row.id)
+	await apis.home.deleteTask(row.id)
 	window.$message.success('删除成功')
 	getTaskList()
 }
 
 // 完成任务
 const handleChangeStatus = async (row: ITask, status) => {
-	await window.$apis.home.finishTask({
+	await apis.home.finishTask({
 		id: row.id,
 		status,
 	})
@@ -57,10 +58,10 @@ const handleConfirm = () => {
 	formRef.value.validate(async (valid) => {
 		if (!valid) return
 		if (taskDetail.value.id) {
-			await window.$apis.home.addTask(taskDetail.value)
+			await apis.home.addTask(taskDetail.value)
 			window.$message.success('任务添加成功')
 		} else {
-			await window.$apis.home.editTask(taskDetail.value)
+			await apis.home.editTask(taskDetail.value)
 			window.$message.success('任务编辑成功')
 		}
 		handleClose()

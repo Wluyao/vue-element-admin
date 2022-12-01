@@ -8,11 +8,11 @@ import { TokenName } from '@/config/const'
 import request from '@/utils/request'
 import { getTreeNodeValue } from '@/utils/core'
 import { localMng, sessionMng } from '@/utils/storage-mng'
-import { IUserInfo, IMenu } from '@/model/common'
+import { IUser, IMenu } from '@/model/common'
 
 interface IState {
 	token: string
-	userInfo: IUserInfo
+	userInfo: IUser
 	menuList: IMenu[]
 	permissions: string[]
 }
@@ -20,14 +20,7 @@ interface IState {
 export const useAppStore = defineStore('app', {
 	state: (): IState => ({
 		token: localMng.getItem(TokenName),
-		userInfo: {
-			id: 0,
-			email: '',
-			phone: '',
-			name: '',
-			registerTime: '',
-			roles: [],
-		},
+		userInfo: {} as IUser,
 		menuList: [],
 		permissions: [],
 	}),

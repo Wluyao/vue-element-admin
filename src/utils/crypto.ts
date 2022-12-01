@@ -1,7 +1,7 @@
 import CryptoJS from 'crypto-js'
 
 // DES加密
-export function encryptByDES(message: string, key: string) {
+export const encryptByDES = (message: string, key: string) => {
 	const keyHex = CryptoJS.enc.Utf8.parse(key)
 	const encrypted = CryptoJS.DES.encrypt(message, keyHex, {
 		mode: CryptoJS.mode.ECB,
@@ -11,7 +11,7 @@ export function encryptByDES(message: string, key: string) {
 }
 
 // DES解密
-export function decryptByDES(message: string, key: string) {
+export const decryptByDES = (message: string, key: string) => {
 	var keyHex = CryptoJS.enc.Utf8.parse(key)
 	var decrypted = CryptoJS.DES.decrypt(message, keyHex, {
 		mode: CryptoJS.mode.ECB,
@@ -22,7 +22,7 @@ export function decryptByDES(message: string, key: string) {
 
 // AES加密
 // 使用AES秘钥必须为：8/16/32位
-export function encryptByAES(message: string, key: string) {
+export const encryptByAES = (message: string, key: string) => {
 	var keyHex = CryptoJS.enc.Utf8.parse(key)
 	var encrypted = CryptoJS.AES.encrypt(message, keyHex, {
 		mode: CryptoJS.mode.ECB,
@@ -32,7 +32,7 @@ export function encryptByAES(message: string, key: string) {
 }
 
 // AES解密
-export function decryptByAES(message: string, key: string) {
+export const decryptByAES = (message: string, key: string) => {
 	var keyHex = CryptoJS.enc.Utf8.parse(key)
 	var decrypted = CryptoJS.AES.decrypt(message, keyHex, {
 		mode: CryptoJS.mode.ECB,

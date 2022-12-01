@@ -2,16 +2,15 @@ export interface IUser {
 	id: number
 	name: string
 	username: string
-	phone: string
+	mobile: string
 	email: string
 	avatar: string
 	gender: '1' | '2'
 	age: number
-	// 角色
-	roles: Array<{
-		id: number
-		name: string
-	}>
-	createDate: string
-	remark?: string
+	role: number
+	roleName: string
+	//  状态 0：停用 1：启用
+	status: '0' | '1'
+	createTime: string
+	remark: string
 }

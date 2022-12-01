@@ -2,7 +2,7 @@ import { RouteRecordRaw } from 'vue-router'
 import portal from './modules/portal'
 import article from './modules/article'
 import blank from './modules/blank'
-import error from './modules/error'
+import common from './modules/common'
 import home from './modules/home'
 import individule from './modules/individule'
 import more from './modules/more'
@@ -19,7 +19,7 @@ const routes: RouteRecordRaw[] = [
 		path: '/platform',
 		component: () => import('@/layouts/platform/Platform.vue'),
 		redirect: '/home',
-		children: [...article, ...blank, ...error, ...home, ...individule, ...more, ...role, ...setting, ...user],
+		children: [...article, ...blank, ...common, ...home, ...individule, ...more, ...role, ...setting, ...user],
 	},
 	{
 		path: '/portal',
@@ -27,10 +27,9 @@ const routes: RouteRecordRaw[] = [
 		redirect: '/login',
 		children: portal,
 	},
-
 	{
 		path: '/:pathMatch(.*)*',
-		redirect: '/error/not-found',
+		redirect: '/not-found',
 	},
 ]
 

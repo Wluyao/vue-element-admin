@@ -38,6 +38,7 @@ onMounted(() => {
 	}
 
 	&-page {
+		position: relative;
 		padding: 20px;
 		height: 100%;
 		flex: auto;

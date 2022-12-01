@@ -39,20 +39,28 @@ const logout = () => {
 				<span v-else class="black3">{{ item.meta.title }}</span>
 			</el-breadcrumb-item>
 		</el-breadcrumb>
+		<BaseIcon class="button-hover ml-auto" :size="22" @click="$router.push('/setting')"><IconCustomSetting /></BaseIcon>
 
-		<div class="ml-auto flex items-center">
-			<BaseIcon class="button-hover" :size="24" @click="$router.push('/setting')"><IconCustomSetting /></BaseIcon>
+		<el-popover popper-class="layout-header-popover" trigger="click">
+			<template #reference>
+				<div class="flex items-center">
+					<div class="individual">
+						<Avatar :image="userInfo.avatar" />
+						<div class="ml-2">{{ userInfo.name }}</div>
+					</div>
+				</div>
+			</template>
 
-			<div class="individual" @click="$router.push('/individual')">
-				<Avatar />
-				<div class="username">{{ userInfo.name }}</div>
+			<div class="popover-item" @click="$router.push('/individual')">
+				<BaseIcon> <IconCustomUser /> </BaseIcon>
+				<span class="ml-2">个人中心</span>
 			</div>
 
-			<div class="logout" @click="logout">
-				<BaseIcon><IconCustomExit /></BaseIcon>
+			<div class="popover-item" @click="logout">
+				<BaseIcon> <IconCustomExit /> </BaseIcon>
 				<span class="ml-2">退出登录</span>
 			</div>
-		</div>
+		</el-popover>
 	</div>
 </template>
 
@@ -62,6 +70,8 @@ const logout = () => {
 	align-items: center;
 	height: 50px;
 	padding: 0 20px;
+	color: @black6;
+
 	.collapse {
 		margin-right: 10px;
 		line-height: 50px;
@@ -73,24 +83,36 @@ const logout = () => {
 		display: flex;
 		align-items: center;
 		margin: 10px;
-		color: @black6;
+
 		cursor: pointer;
 
-		.username {
-			margin-left: 5px;
-			.button-hover;
+		&:hover {
+			color: @theme;
 		}
-	}
-
-	.logout {
-		display: flex;
-		align-items: center;
-		.button-hover;
 	}
 
 	:deep(.el-breadcrumb__separator) {
 		font-weight: normal;
 		margin: 0 5px;
 	}
+}
+
+.layout-header-popover {
+	.popover-item {
+		display: flex;
+		align-items: center;
+		padding: 10px;
+		cursor: pointer;
+
+		&:hover {
+			background-color: #f2f8ff;
+		}
+	}
+}
+</style>
+
+<style>
+.layout-header-popover {
+	padding: 5px 0 !important;
 }
 </style>

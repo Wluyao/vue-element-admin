@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
 import { encryptByDES } from '@/utils/crypto'
+import { DesKey } from '@/config/const'
 import { useAppStore } from '@/store'
 
 const formRef = ref<FormInstance>()
@@ -41,10 +42,9 @@ const handleLogin = () => {
 		if (!valid) return
 		try {
 			loginLoading.value = true
-			const eccryptKey = '123456'
 			await appStore.login({
 				username: formData.value.username,
-				password: encryptByDES(formData.value.password, eccryptKey),
+				password: encryptByDES(formData.value.password, DesKey),
 			})
 		} catch (err) {
 			console.error(err)
@@ -94,9 +94,9 @@ const handleLogin = () => {
 		<div class="flex mb-8">
 			<el-checkbox v-model="formData.remember">记住账号</el-checkbox>
 			<div class="ml-auto">
-				<el-button type="primary" link @click="$router.push('/portal/password')">忘记密码？</el-button>
+				<el-button type="primary" link @click="$router.push('/password')">忘记密码？</el-button>
 				<span class="text-white mx-2">没有账号?</span>
-				<el-button type="primary" link @click="$router.push('/portal/register')">立即注册</el-button>
+				<el-button type="primary" link @click="$router.push('/register')">立即注册</el-button>
 			</div>
 		</div>
 

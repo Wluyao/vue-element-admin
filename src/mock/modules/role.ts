@@ -71,12 +71,6 @@ export const permissionList = [
 		children: [
 			{
 				id: 101,
-				name: '打印',
-				type: 'menu',
-				path: '/more/print',
-			},
-			{
-				id: 102,
 				name: 'fileToBase64',
 				type: 'menu',
 				path: '/more/fileToBase64',

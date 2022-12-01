@@ -1,23 +1,18 @@
 // 用户信息
-export interface IUserInfo {
+
+export interface IUser {
 	id: number
-	// 姓名
 	name: string
-	// 邮箱
+	username: string
+	mobile: string
 	email: string
-	// 手机号
-	phone: string
-	// 性别
-	gender?: '1' | '2'
-	// 头像
-	avatar?: string
+	avatar: string
+	gender: '1' | '2'
+	age: number
 	// 角色
-	roles: Array<{
-		id: number
-		name: string
-	}>
-	// 注册时间
-	registerTime: string
+	role: number
+	createDate: string
+	remark?: string
 }
 
 // 菜单

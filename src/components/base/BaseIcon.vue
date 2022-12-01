@@ -13,6 +13,8 @@ interface IProps {
 	strokeWidth?: string | number
 	// 描边颜色
 	stroke?: string
+	// 填充色
+	fill?: string
 	// 旋转角度
 	rotate?: number
 }
@@ -25,10 +27,11 @@ const props = withDefaults(defineProps<IProps>(), {
 
 const iconStyle = computed<CSSProperties>(() => ({
 	fontSize: typeof props.size === 'string' ? props.size : `${props.size}px`,
+	transform: `rotateZ(${props.rotate}deg)`,
 	color: props.color,
 	strokeWidth: props.strokeWidth,
 	stroke: props.stroke,
-	transform: `rotateZ(${props.rotate}deg)`,
+	fill: props.fill,
 }))
 </script>
 

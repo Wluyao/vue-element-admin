@@ -2,8 +2,9 @@
 import { ref, onMounted } from 'vue'
 import { exportExcel } from '@/utils/excle'
 import { IUser } from '@/model/user'
-import { enumGender } from '@/config/enum'
+import { enumGender, enumUserStatus } from '@/config/enum'
 import { useEnumStore } from '@/store'
+import apis from '@/apis'
 import UserEdit from './components/UserEdit.vue'
 
 interface IFormData {
@@ -31,7 +32,7 @@ onMounted(() => {
 
 const getTableData = async () => {
 	tableLoading.value = true
-	const data = await window.$apis.user.getUserList({
+	const data = await apis.user.getUserList({
 		...formData.value,
 		page: page.value,
 	})
@@ -52,18 +53,18 @@ const handleReset = () => {
 
 const handleExport = async () => {
 	exportLoading.value = true
-	const res = await window.$apis.user.getAllUserList()
-	const data = res.map((item, index) => {
+	const data = await apis.user.getAllUserList()
+	const useList = data.map((item) => {
 		return {
 			name: item.name,
 			phone: item.phone,
 			gender: item.gender,
-			roles: item.roles.map((item) => item.name).join('，'),
+			roleName: item.roleName,
 			createDate: item.createDate,
 			consume: item.consume,
 		}
 	})
-	// exportExcel(['姓名', '手机', '性别', '角色', '创建时间', '累计消费额(元)'], data, '用户数据表')
+	exportExcel(['姓名', '手机', '性别', '角色', '创建时间', '累计消费额(元)'], useList, '用户数据表')
 	exportLoading.value = false
 }
 
@@ -72,7 +73,7 @@ const handleEdit = (row?: IUser) => {
 }
 
 const handleDelete = async (row: IUser) => {
-	await window.$apis.user.deleteUser(row.id)
+	await apis.user.deleteUser(row.id)
 	window.$message.success('删除成功')
 	getTableData()
 }
@@ -84,11 +85,11 @@ const handleDelete = async (row: IUser) => {
 			<BaseTitle>用户列表</BaseTitle>
 			<div class="ml-auto">
 				<el-button type="primary" @click="handleEdit()">
-					<BaseIcon class="mr-1" name="plus" />
+					<BaseIcon class="mr-1"><IconCustomPlus /> </BaseIcon>
 					新增用户
 				</el-button>
 				<el-button type="info" :loading="exportLoading" @click="handleExport">
-					<BaseIcon class="mr-1" name="download" />
+					<BaseIcon class="mr-1"><IconCustomDownload /> </BaseIcon>
 					导出表格
 				</el-button>
 			</div>
@@ -115,11 +116,11 @@ const handleDelete = async (row: IUser) => {
 			</el-form-item>
 			<el-form-item>
 				<el-button type="primary" @click="handleSearch">
-					<BaseIcon class="mr-1" name="search" />
+					<BaseIcon class="mr-1"><IconCustomSearch /> </BaseIcon>
 					查询
 				</el-button>
 				<el-button @click="handleReset">
-					<BaseIcon class="mr-1" name="refresh" />
+					<BaseIcon class="mr-1"><IconCustomRefresh /> </BaseIcon>
 					重置
 				</el-button>
 			</el-form-item>
@@ -128,22 +129,23 @@ const handleDelete = async (row: IUser) => {
 		<div>
 			<el-table v-loading="tableLoading" :data="tableData">
 				<el-table-column prop="name" label="姓名"></el-table-column>
-				<el-table-column prop="phone" label="手机"></el-table-column>
+				<el-table-column prop="mobile" label="手机"></el-table-column>
 				<el-table-column prop="gender" label="性别">
-					<template #default="scope">
-						{{ enumGender[scope.row.gender] }}
+					<template #default="{ row }"> {{ enumGender[row.gender] }} </template>
+				</el-table-column>
+				<el-table-column prop="roleName" label="角色"></el-table-column>
+				<el-table-column prop="status" label="状态">
+					<template #default="{ row }">
+						<el-tag :type="enumUserStatus.getStatus(row.status)"> {{ enumUserStatus[row.status] }} </el-tag>
 					</template>
 				</el-table-column>
-				<el-table-column prop="roles" label="角色">
-					<!-- <template #default="scope">{{ scope.row.roles.map((item) => item.name).join('，') }}</template> -->
-				</el-table-column>
-				<el-table-column prop="createDate" label="创建时间" sortable></el-table-column>
+				<el-table-column prop="createTime" label="创建时间" sortable></el-table-column>
 				<el-table-column prop="consume" label="累计消费额(元)" width="160px" sortable></el-table-column>
 				<el-table-column label="操作" width="120px">
-					<template #default="scope">
-						<el-button type="primary" link @click="handleEdit(scope.row)">编辑</el-button>
+					<template #default="{ row }">
+						<el-button type="primary" link @click="handleEdit(row)">编辑</el-button>
 						<el-divider direction="vertical"></el-divider>
-						<el-popconfirm title="确认删除该用户吗？" @confirm="handleDelete(scope.row)">
+						<el-popconfirm title="确认删除该用户吗？" @confirm="handleDelete(row)">
 							<template #reference>
 								<el-button type="danger" link>删除</el-button>
 							</template>

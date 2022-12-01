@@ -15,16 +15,16 @@ export const enumGender = enumMng([
 	},
 ])
 
-//  账户状态
-export const enumAccountStatus = enumMng([
+//  用户状态
+export const enumUserStatus = enumMng([
 	{
 		id: '0',
 		name: '停用',
-		color: error,
+		status: 'danger',
 	},
 	{
 		id: '1',
 		name: '启用',
-		color: success,
+		status: 'success',
 	},
 ])
