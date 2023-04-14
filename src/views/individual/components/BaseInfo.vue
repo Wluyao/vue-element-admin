@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
 import { useAppStore } from '@/store'
 import apis from '@/apis'
 import BaseEdit from './BaseEdit.vue'
@@ -28,7 +27,7 @@ const handleUploadAvatar = async (avatar) => {
 				<div>
 					邮箱：
 					<span v-if="userInfo.email">{{ userInfo.email }}</span>
-					<span v-else class="black6">未设置</span>
+					<span v-else class="text-info-regular">未设置</span>
 					<el-button class="ml-2" type="primary" link @click="editRef.open('email')">
 						<BaseIcon><IconCustomEdit /></BaseIcon>
 					</el-button>
@@ -37,7 +36,7 @@ const handleUploadAvatar = async (avatar) => {
 				<div class="ml-10">
 					手机号：
 					<span v-if="userInfo.mobile">{{ userInfo.mobile }}</span>
-					<span v-else class="black6">未设置</span>
+					<span v-else class="text-info-regular">未设置</span>
 					<el-button class="ml-2" type="primary" link @click="editRef.open('mobile')">
 						<BaseIcon><IconCustomEdit /></BaseIcon>
 					</el-button>

@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
 import { regPassword, regMobile } from '@/config/regexp'
 import { useAppStore } from '@/store'
 import { encryptByDES } from '@/utils/crypto'
-import { DesKey } from '@/config/const'
+import { DesKey } from '@/config/constant'
 import { useSmsCaptcha } from '@/hooks/business'
 import apis from '@/apis'
 

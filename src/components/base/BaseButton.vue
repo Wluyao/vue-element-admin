@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
 import type { CSSProperties } from 'vue'
 
 interface IProps {
@@ -71,24 +70,24 @@ const handleClick = (e: MouseEvent) => {
 	cursor: pointer;
 
 	&-ordinary {
-		color: @black3;
+		color: @info3;
 		background-color: #fff;
 		border: 1px solid #eee;
 	}
 
 	&-primary {
 		color: #fff;
-		background-image: linear-gradient(to bottom, #14cc9b, @theme);
+		background-image: linear-gradient(to bottom, #14cc9b, @primary);
 		box-shadow: 0 10px 10px -10px rgba(0, 150, 136, 0.5);
 
 		&:active:not(.base-button-disabled) {
-			background-image: linear-gradient(to bottom, @theme, @theme);
+			background-image: linear-gradient(to bottom, @primary, @primary);
 			box-shadow: none;
 		}
 
 		&.base-button-plain {
-			border: 1px solid @theme;
-			color: @theme;
+			border: 1px solid @primary;
+			color: @primary;
 			background-image: none !important;
 			box-shadow: none !important;
 		}
@@ -105,8 +104,8 @@ const handleClick = (e: MouseEvent) => {
 		}
 
 		&.base-button-plain {
-			border: 1px solid @red;
-			color: @red;
+			border: 1px solid @danger;
+			color: @danger;
 			background-image: none !important;
 			box-shadow: none !important;
 		}

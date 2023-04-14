@@ -143,7 +143,7 @@ const handleConfirm = () => {
 	cursor: pointer;
 
 	&:hover {
-		border-color: @black9;
+		border-color: @info9;
 	}
 
 	&--round {

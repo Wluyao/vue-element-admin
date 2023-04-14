@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
 import { IGoods } from '@/model/home'
 import apis from '@/apis'
 
@@ -19,7 +18,7 @@ const getGoodsList = async () => {
 	<el-card class="goods-card">
 		<template #header>
 			<div class="flex items-center">
-				<span class="f16">今日新上架商品</span>
+				<span class="text-base">今日新上架商品</span>
 			</div>
 		</template>
 		<el-table :data="goodsList" height="400">

@@ -12,12 +12,13 @@
 		"lib": ["esnext", "dom"],
 		"noImplicitAny": false,
 		"strictNullChecks": true,
-		"types": ["element-plus/global", "unplugin-icons/types/vue"],
+		"types": ["element-plus/global", "unplugin-icons/types/vue", "node"],
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["src/*"]
+			"@/*": ["src/*"],
+			"@img/*": ["src/assets/images/*"]
 		}
 	},
-	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "components.d.ts"],
+	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "auto-imports.d.ts", "components.d.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

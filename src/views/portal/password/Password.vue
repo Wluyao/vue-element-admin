@@ -1,11 +1,9 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { FormInstance, FormRules } from 'element-plus'
 import { regPassword, regMobile } from '@/config/regexp'
 import { useSmsCaptcha } from '@/hooks'
 import { encryptByDES } from '@/utils/crypto'
-import { DesKey } from '@/config/const'
+import { DesKey } from '@/config/constant'
 import apis from '@/apis'
 
 const formRef = ref<FormInstance>()

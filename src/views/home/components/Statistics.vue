@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
 import { IStatistics } from '@/model/home'
 import apis from '@/apis'
 

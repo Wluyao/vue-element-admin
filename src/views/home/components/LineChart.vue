@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref, onMounted, computed, watch } from 'vue'
 import { Chart } from '@antv/g2'
 import apis from '@/apis'
 

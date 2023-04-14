@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { useRouter } from 'vue-router'
-
 interface IProps {
 	title?: string
 	back?: () => void
@@ -41,7 +39,7 @@ const handleBack = () => {
 	background: #d8ecff;
 	border-radius: 50%;
 	margin-right: 10px;
-	color: @theme;
+	color: @primary;
 	cursor: pointer;
 	display: flex;
 	align-items: center;
@@ -51,6 +49,6 @@ const handleBack = () => {
 .title {
 	font-weight: bold;
 	font-size: 18px;
-	color: @black3;
+	color: @info3;
 }
 </style>

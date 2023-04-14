@@ -46,29 +46,29 @@ withDefaults(defineProps<IProps>(), {
 		border: 1px solid transparent;
 
 		&-primary {
-			background-color: @theme;
-			border-color: @theme;
-			color: @theme;
+			background-color: @primary;
+			border-color: @primary;
+			color: @primary;
 		}
 		&-success {
-			background-color: @green;
-			border-color: @green;
-			color: @green;
+			background-color: @success;
+			border-color: @success;
+			color: @success;
 		}
 		&-info {
-			background-color: @black9;
-			border-color: @black9;
-			color: @black9;
+			background-color: @info9;
+			border-color: @info9;
+			color: @info9;
 		}
 		&-warning {
-			background-color: @orange;
-			border-color: @orange;
-			color: @orange;
+			background-color: @warning;
+			border-color: @warning;
+			color: @warning;
 		}
 		&-danger {
-			background-color: @red;
-			border-color: @red;
-			color: @red;
+			background-color: @danger;
+			border-color: @danger;
+			color: @danger;
 		}
 	}
 }

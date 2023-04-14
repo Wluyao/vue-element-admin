@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import { ref, computed, watchEffect } from 'vue'
-import { useRoute, RouteLocationMatched } from 'vue-router'
+import { RouteLocationMatched } from 'vue-router'
 import { useAppStore, useUiStore } from '@/store'
 
 const matchList = ref<RouteLocationMatched[]>([])
@@ -29,17 +28,20 @@ const logout = () => {
 
 <template>
 	<div class="platform-layout-header">
-		<BaseIcon class="collapse" :size="24" @click="toggleCollapse">
-			<IconCustomMenuFold v-if="sideCollapse" /><IconCustomMenuUnfold v-else />
+		<BaseIcon class="menu-collapse" :size="24" @click="toggleCollapse">
+			<IconCustomMenuFold v-if="sideCollapse" />
+			<IconCustomMenuUnfold v-else />
 		</BaseIcon>
 
 		<el-breadcrumb separator="/">
 			<el-breadcrumb-item v-for="(item, index) in matchList" :key="item.path">
-				<span class="black9" v-if="index < matchList.length - 1">{{ item.meta.title }}</span>
-				<span v-else class="black3">{{ item.meta.title }}</span>
+				<span class="text-info-secondary" v-if="index < matchList.length - 1">{{ item.meta.title }}</span>
+				<span v-else class="text-info-primary">{{ item.meta.title }}</span>
 			</el-breadcrumb-item>
 		</el-breadcrumb>
-		<BaseIcon class="button-hover ml-auto" :size="22" @click="$router.push('/setting')"><IconCustomSetting /></BaseIcon>
+		<BaseIcon class="cursor-pointer hover:opacity-80 ml-auto" :size="22" @click="$router.push('/setting')">
+			<IconCustomSetting />
+		</BaseIcon>
 
 		<el-popover popper-class="layout-header-popover" trigger="click">
 			<template #reference>
@@ -70,13 +72,15 @@ const logout = () => {
 	align-items: center;
 	height: 50px;
 	padding: 0 20px;
-	color: @black6;
+	color: @info6;
 
-	.collapse {
+	.menu-collapse {
 		margin-right: 10px;
 		line-height: 50px;
 		cursor: pointer;
-		.button-hover;
+		&:hover {
+			opacity: 0, 8;
+		}
 	}
 
 	.individual {
@@ -87,7 +91,7 @@ const logout = () => {
 		cursor: pointer;
 
 		&:hover {
-			color: @theme;
+			color: @primary;
 		}
 	}
 

@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
 import { FormInstance, FormRules } from 'element-plus'
 import { encryptByDES } from '@/utils/crypto'
-import { DesKey } from '@/config/const'
+import { DesKey } from '@/config/constant'
 import { useAppStore } from '@/store'
 
 const formRef = ref<FormInstance>()

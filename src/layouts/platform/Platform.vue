@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { onMounted } from 'vue'
 import { useEnumStore } from '@/store'
 import HeaderBar from './components/HeaderBar.vue'
 import SideBar from './components/SideBar.vue'

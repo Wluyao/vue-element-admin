@@ -5,7 +5,7 @@
 
 import { tupleStr } from '@/utils/type'
 
-import { TokenName } from '@/config/const'
+import { TokenName } from '@/config/constant'
 
 // 项目中所有存储在localStorage中的数据
 const localKeys = tupleStr(

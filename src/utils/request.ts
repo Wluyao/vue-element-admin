@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios'
 import { baseURL } from '@/config/domain'
-import { TokenName } from '@/config/const'
+import { TokenName } from '@/config/constant'
 import { useAppStoreWithOut } from '@/store'
 import { localMng } from '@/utils/storage-mng'
 

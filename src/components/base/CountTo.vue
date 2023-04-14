@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref, computed, watchEffect, onMounted, watch } from 'vue'
 import { useTransition, TransitionPresets } from '@vueuse/core'
 
 const props = defineProps({

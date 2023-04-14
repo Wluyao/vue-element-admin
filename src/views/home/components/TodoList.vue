@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
 import { ITask } from '@/model/home'
 import apis from '@/apis'
 
@@ -80,7 +79,7 @@ const handleClose = () => {
 	<el-card>
 		<template #header>
 			<div class="flex items-center">
-				<span class="f16 mr-auto">待办事项</span>
+				<span class="text-base mr-auto">待办事项</span>
 				<el-button type="primary" link @click="handleEdit()">添加</el-button>
 			</div>
 		</template>

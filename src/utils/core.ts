@@ -139,3 +139,8 @@ export const getTreeNodeValue = (tree: any, filed: string) =>
 			return result
 		})
 		.flat()
+
+/**
+ * 获取动态图片路径
+ */
+export const getImageUrl = (url: string) => new URL(`../assets/images/${url}`, import.meta.url).href

@@ -4,7 +4,7 @@
 	<el-card>
 		<template #header>
 			<div class="flex items-center">
-				<span class="f16 mr-auto">待办事项</span>
+				<span class="text-base mr-auto">待办事项</span>
 			</div>
 		</template>
 

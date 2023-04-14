@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
-
 type Position = 'left' | 'center' | 'right'
 
 interface IProps {
@@ -85,7 +83,7 @@ const pageSizeNum = computed({
 		.el-pager {
 			.number {
 				font-weight: normal !important;
-				color: @black3;
+				color: @info3;
 			}
 		}
 

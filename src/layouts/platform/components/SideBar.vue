@@ -45,7 +45,7 @@ const activePath = computed(() => {
 		width: 240px;
 		height: 50px;
 		padding: 20px 25px;
-		background-color: @theme;
+		background-color: @primary;
 		text-align: center;
 		transition: all 0.3s ease-in-out;
 		cursor: pointer;

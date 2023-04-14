@@ -48,11 +48,7 @@ export const downloadBlobFile = (binaryString: string, fileName: string) => {
 /**
  *  下载文件。数据源是base64
  */
-export const downloadBase64File = (
-	data: string,
-	fileName: string,
-	headerType?: 'txt' | 'png' | 'jpg' | 'xlsx' | 'lic'
-) => {
+export const downloadBase64File = (data: string, fileName: string, headerType?: 'txt' | 'png' | 'jpg' | 'xlsx') => {
 	const headerMap = {
 		txt: 'data:text/plain',
 		png: 'data:image/png',

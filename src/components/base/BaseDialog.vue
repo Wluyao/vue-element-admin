@@ -7,7 +7,7 @@ interface IProps {
 	type?: Status
 	top?: string
 	width?: string
-	customClass?: string
+	class?: string
 	confirmText?: string
 	cancelText?: string
 	confirmLoading?: boolean
@@ -17,11 +17,14 @@ interface IProps {
 	showConfirm?: boolean
 	showCancel?: boolean
 	destroyOnClose?: boolean
+	modal?: boolean
+	cancel?: () => void
 }
 
 const props = withDefaults(defineProps<IProps>(), {
 	type: 'primary',
 	width: '600px',
+	modal: true,
 	closeOnClickModal: false,
 	showFooter: true,
 	showConfirm: true,
@@ -30,6 +33,10 @@ const props = withDefaults(defineProps<IProps>(), {
 })
 
 const emit = defineEmits(['confirm', 'close', 'opened'])
+
+onBeforeUnmount(() => {
+	handleClose()
+})
 
 const handleConfirm = () => {
 	emit('confirm')
@@ -44,17 +51,26 @@ const handleClose = () => {
 const handleOpened = () => {
 	emit('opened')
 }
+
+const handleCancel = () => {
+	if (props.cancel) {
+		props.cancel()
+	} else {
+		handleClose()
+	}
+}
 </script>
 
 <template>
 	<el-dialog
-		:custom-class="`base-dialog ${customClass}`"
+		:class="`base-dialog ${props.class}`"
 		:title="title"
 		:model-value="visible"
 		:width="width"
 		:top="top"
 		:destroy-on-close="destroyOnClose"
 		append-to-body
+		:modal="modal"
 		:close-on-click-modal="closeOnClickModal"
 		@close="handleClose"
 		@opened="handleOpened"
@@ -72,11 +88,11 @@ const handleOpened = () => {
 				<slot name="footer">
 					<slot name="customBtn"></slot>
 
-					<el-button v-show="showCancel" @click="handleClose">
+					<el-button v-if="showCancel" @click="handleCancel">
 						{{ cancelText || '取消' }}
 					</el-button>
 					<el-button
-						v-show="showConfirm"
+						v-if="showConfirm"
 						:type="type"
 						:disabled="confirmDisabled"
 						:loading="confirmLoading"
@@ -92,7 +108,7 @@ const handleOpened = () => {
 <style lang="less">
 .base-dialog {
 	.el-dialog__header {
-		padding: 12px 0;
+		padding: 12px 20px;
 		text-align: center;
 		background-color: #f2f8ff;
 		margin-right: 0;

@@ -1,13 +1,11 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-
 interface IProps {
 	title?: string
 	direction?: 'rtl' | 'ltr' | 'ttb' | 'btt'
 	size?: string
 	visible: boolean
 	type?: Status
-	customClass?: string
+	class?: string
 	confirmText?: string
 	cancelText?: string
 	confirmLoading?: boolean
@@ -24,7 +22,6 @@ interface IProps {
 const props = withDefaults(defineProps<IProps>(), {
 	size: '600px',
 	type: 'primary',
-	customClass: '',
 	closeOnClickModal: false,
 	showClose: true,
 	showFooter: true,
@@ -46,6 +43,10 @@ defineExpose({
 
 const scrollRef = ref()
 
+onBeforeUnmount(() => {
+	handleClose()
+})
+
 const handleConfirm = () => {
 	emit('confirm')
 }
@@ -55,6 +56,7 @@ const handleClose = () => {
 		emit('close')
 	}
 }
+
 const handleOpen = () => {
 	emit('open')
 }
@@ -62,7 +64,7 @@ const handleOpen = () => {
 
 <template>
 	<el-drawer
-		:custom-class="`base-drawer ${customClass}`"
+		:class="`base-drawer ${props.class}`"
 		:model-value="visible"
 		:direction="direction"
 		:size="size"
@@ -78,10 +80,10 @@ const handleOpen = () => {
 			<div class="base-drawer-header">
 				<slot name="header">
 					<slot name="before-title"></slot>
-					<span class="title-text">{{ title }}</span>
+					<span class="title-text text-t-500">{{ title }}</span>
 				</slot>
 
-				<div v-if="showClose" class="icon-close" @click="handleClose">
+				<div v-if="showClose" class="icon-close event-area-expand" @click="handleClose">
 					<BaseIcon :size="16">
 						<IconCustomClose />
 					</BaseIcon>
@@ -96,11 +98,11 @@ const handleOpen = () => {
 
 			<div v-if="showFooter" class="base-drawer-footer">
 				<slot name="footer">
-					<el-button v-show="showCancel" @click="handleClose">
+					<el-button v-if="showCancel" @click="handleClose">
 						{{ cancelText || '取消' }}
 					</el-button>
 					<el-button
-						v-show="showConfirm"
+						v-if="showConfirm"
 						:type="type"
 						:disabled="confirmDisabled"
 						:loading="confirmLoading"
@@ -145,10 +147,12 @@ const handleOpen = () => {
 	.title-text {
 		font-weight: bold;
 		font-size: 16px;
-		color: @theme;
 	}
 
 	.icon-close {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 30px;
 		height: 30px;
 		border-radius: 50%;
@@ -156,8 +160,10 @@ const handleOpen = () => {
 		color: @theme;
 		margin-left: auto;
 		cursor: pointer;
-		.flex-center;
-		.button-hover;
+
+		&:hover {
+			opacity: 0.8;
+		}
 	}
 }
 </style>

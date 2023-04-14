@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { ref, shallowRef } from 'vue'
 import { useAppStore } from '@/store'
 import { encryptByDES } from '@/utils/crypto'
-import { DesKey } from '@/config/const'
+import { DesKey } from '@/config/constant'
 
 import apis from '@/apis'
 

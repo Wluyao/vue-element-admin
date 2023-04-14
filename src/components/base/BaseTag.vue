@@ -25,19 +25,19 @@ withDefaults(defineProps<IProps>(), {
 	font-size: 12px;
 
 	&-primary {
-		background-color: @theme;
+		background-color: @primary;
 	}
 	&-success {
-		background-color: @green;
-	}
-	&-info {
-		background-color: @black9;
+		background-color: @success;
 	}
 	&-warning {
-		background-color: @orange;
+		background-color: @warning;
 	}
 	&-danger {
-		background-color: @red;
+		background-color: @danger;
+	}
+	&-info {
+		background-color: @info9;
 	}
 }
 </style>

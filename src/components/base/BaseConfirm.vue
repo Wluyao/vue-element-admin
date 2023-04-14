@@ -53,23 +53,23 @@ const handleClose = () => {
 <style lang="less" scoped>
 .icon {
 	&-primary {
-		color: @theme;
+		color: @priamry;
 	}
 
 	&-success {
-		color: @green;
+		color: @success;
 	}
 
 	&-warning {
-		color: @orange;
+		color: @warning;
 	}
 
 	&-danger {
-		color: @red;
+		color: @danger;
 	}
 
 	&-info {
-		color: @gray;
+		color: @info9;
 	}
 }
 </style>

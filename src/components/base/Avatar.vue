@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
 import imgAvatar from '@/assets/images/common/avatar_default.png'
 
 interface IProps {

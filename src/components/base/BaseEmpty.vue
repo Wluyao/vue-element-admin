@@ -29,13 +29,13 @@ withDefaults(defineProps<IProps>(), {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	box-sizing: border-box;
+	padding: 20px;
 	height: 100%;
 }
 
 .message {
 	line-height: normal;
 	padding: 10px;
-	color: @black9;
+	color: @info9;
 }
 </style>
